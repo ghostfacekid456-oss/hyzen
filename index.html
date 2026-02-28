@@ -1,95 +1,224 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Website</title>
+    <title>Atlas Mundi - Explore Nations</title>
     <style>
-        /* This section makes your website look pretty */
         :root {
-            --primary-color: #4a90e2;
-            --bg-color: #f4f7f6;
-            --text-color: #333;
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
         }
 
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        header {
             text-align: center;
-            max-width: 400px;
-            width: 90%;
+            margin-bottom: 40px;
         }
 
-        h1 { color: var(--primary-color); }
-
-        button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s;
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
         }
 
-        #message {
-            margin-top: 20px;
+        #countrySearch {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            transition: border-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        #countrySearch:focus {
+            border-color: var(--accent);
+        }
+
+        .nations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .nation-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--accent);
+        }
+
+        .nation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .nation-name {
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        .feature-tag {
+            display: inline-block;
+            background: #e1f0fa;
+            color: #2980b9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
             font-weight: bold;
-            min-height: 1.2em;
+        }
+
+        .detail-item {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #95a5a6;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome!</h1>
-        <p>I built this website and hosted it on GitHub.</p>
-        
-        <!-- Interactive button -->
-        <button id="magicButton">Click for Magic</button>
-        
-        <div id="message"></div>
+    <header>
+        <h1>Atlas Mundi</h1>
+        <p>Discover nations and their unique global features</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="countrySearch" placeholder="Search by country or feature (e.g. Rainforest)...">
+    </div>
+
+    <div class="nations-grid" id="nationsGrid">
+        <!-- Cards will be generated here by JavaScript -->
     </div>
 
     <script>
-        // This section adds the "brain" to your website
-        const btn = document.getElementById('magicButton');
-        const msg = document.getElementById('message');
-        
-        const surprises = [
-            "✨ You're a coding rockstar!",
-            "🚀 To infinity and beyond!",
-            "💻 Coding is a superpower.",
-            "🌟 Keep learning every day!"
+        // Database of Nations and Features
+        const nations = [
+            {
+                name: "Japan",
+                capital: "Tokyo",
+                continent: "Asia",
+                feature: "Mount Fuji",
+                description: "Known for its perfect symmetry and spiritual significance."
+            },
+            {
+                name: "Brazil",
+                capital: "Brasília",
+                continent: "South America",
+                feature: "Amazon Rainforest",
+                description: "The world's largest tropical rainforest and river system."
+            },
+            {
+                name: "Egypt",
+                capital: "Cairo",
+                continent: "Africa",
+                feature: "Great Pyramids of Giza",
+                description: "The oldest of the Seven Wonders of the Ancient World."
+            },
+            {
+                name: "France",
+                capital: "Paris",
+                continent: "Europe",
+                feature: "Eiffel Tower",
+                description: "A global cultural icon of France and architectural marvel."
+            },
+            {
+                name: "Australia",
+                capital: "Canberra",
+                continent: "Oceania",
+                feature: "Great Barrier Reef",
+                description: "The world's largest coral reef system, visible from space."
+            },
+            {
+                name: "Canada",
+                capital: "Ottawa",
+                continent: "North America",
+                feature: "Niagara Falls",
+                description: "Massive waterfalls renowned for their beauty and power."
+            },
+            {
+                name: "India",
+                capital: "New Delhi",
+                continent: "Asia",
+                feature: "Taj Mahal",
+                description: "An ivory-white marble mausoleum on the Yamuna river."
+            }
         ];
 
-        btn.addEventListener('click', () => {
-            const randomIdx = Math.floor(Math.random() * surprises.length);
-            msg.textContent = surprises[randomIdx];
-            
-            // Change background color randomly too!
-            const hue = Math.floor(Math.random() * 360);
-            document.body.style.backgroundColor = `hsl(${hue}, 70%, 90%)`;
+        const grid = document.getElementById('nationsGrid');
+        const searchInput = document.getElementById('countrySearch');
+
+        function displayNations(filter = "") {
+            grid.innerHTML = "";
+            const filtered = nations.filter(n => 
+                n.name.toLowerCase().includes(filter.toLowerCase()) || 
+                n.feature.toLowerCase().includes(filter.toLowerCase()) ||
+                n.continent.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-results">No nations found matching your search.</div>';
+                return;
+            }
+
+            filtered.forEach(nation => {
+                const card = document.createElement('div');
+                card.className = 'nation-card';
+                card.innerHTML = `
+                    <h2 class="nation-name">${nation.name}</h2>
+                    <div class="detail-item"><span class="label">Capital:</span> ${nation.capital}</div>
+                    <div class="detail-item"><span class="label">Continent:</span> ${nation.continent}</div>
+                    <p style="font-size: 0.9rem; color: #666;">${nation.description}</p>
+                    <span class="feature-tag">⭐ ${nation.feature}</span>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Search logic
+        searchInput.addEventListener('input', (e) => {
+            displayNations(e.target.value);
         });
+
+        // Initial display
+        displayNations();
     </script>
 </body>
 </html>
