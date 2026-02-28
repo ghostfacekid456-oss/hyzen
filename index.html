@@ -3,222 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlas Mundi - Explore Nations</title>
+    <title>Earthly - AI Nature Guide</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #3498db;
-            --bg: #f8f9fa;
+            --nature-green: #27ae60;
+            --ocean-blue: #2980b9;
+            --earth-brown: #795548;
+            --bg: #f0f4f0;
             --card-bg: #ffffff;
-            --text: #333;
+            --text: #2c3e50;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* Hero Section */
         header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            width: 100%;
+            padding: 60px 20px;
             text-align: center;
-            margin-bottom: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+        /* AI Assistant Box */
+        .ai-box {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            margin: -40px auto 30px;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
         }
 
-        .search-container {
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--nature-green);
+            font-weight: bold;
+        }
+
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--nature-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        #aiInput {
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 30px;
-        }
-
-        #countrySearch {
-            width: 100%;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            border: 2px solid #ddd;
-            border-radius: 30px;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
 
-        #countrySearch:focus {
-            border-color: var(--accent);
+        #aiResponse {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            font-style: italic;
+            display: none;
+            border-left: 4px solid var(--nature-green);
         }
 
-        .nations-grid {
+        /* Feature Grid */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            width: 100%;
+            width: 90%;
             max-width: 1200px;
+            margin-bottom: 50px;
         }
 
-        .nation-card {
-            background: var(--card-bg);
+        .feature-card {
+            background: white;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            border-top: 5px solid var(--accent);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
         }
 
-        .nation-card:hover {
+        .feature-card:hover {
             transform: translateY(-5px);
         }
 
-        .nation-name {
-            font-size: 1.5rem;
-            margin: 0 0 10px 0;
-            color: var(--primary);
+        .feature-info {
+            padding: 20px;
         }
 
-        .feature-tag {
-            display: inline-block;
-            background: #e1f0fa;
-            color: #2980b9;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 10px;
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
             font-weight: bold;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            background: var(--nature-green);
         }
 
-        .detail-item {
-            margin: 8px 0;
-            font-size: 0.95rem;
-        }
+        .category-water { background: var(--ocean-blue); }
+        .category-land { background: var(--earth-brown); }
+        .category-fire { background: #e67e22; }
 
-        .label {
-            font-weight: bold;
-            color: #7f8c8d;
-        }
+        h2 { margin: 10px 0; color: var(--primary); }
+        p { color: #666; line-height: 1.6; }
 
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 50px;
-            color: #95a5a6;
-            font-style: italic;
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: #888;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Atlas Mundi</h1>
-        <p>Discover nations and their unique global features</p>
+        <h1>Earthly Nature Guide</h1>
+        <p>Your AI-powered encyclopedia of the natural world</p>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="countrySearch" placeholder="Search by country or feature (e.g. Rainforest)...">
+    <div class="ai-box">
+        <div class="ai-header">
+            <div class="ai-avatar">🍃</div>
+            <span>Nature Assistant</span>
+        </div>
+        <input type="text" id="aiInput" placeholder="Ask me about Volcanoes, Rainforests, or Oceans...">
+        <div id="aiResponse"></div>
     </div>
 
-    <div class="nations-grid" id="nationsGrid">
-        <!-- Cards will be generated here by JavaScript -->
+    <div class="grid" id="featureGrid">
+        <!-- Natural features will appear here -->
     </div>
+
+    <footer>
+        &copy; 2024 Earthly Nature Project - Built for Learning
+    </footer>
 
     <script>
-        // Database of Nations and Features
-        const nations = [
+        // Large Database of Earth's Natural Features
+        const features = [
             {
-                name: "Japan",
-                capital: "Tokyo",
-                continent: "Asia",
-                feature: "Mount Fuji",
-                description: "Known for its perfect symmetry and spiritual significance."
+                title: "Volcanoes",
+                category: "fire",
+                description: "An opening in the Earth's crust through which lava, ash, and gases erupt.",
+                fact: "The largest volcano on Earth is Mauna Loa in Hawaii."
             },
             {
-                name: "Brazil",
-                capital: "Brasília",
-                continent: "South America",
-                feature: "Amazon Rainforest",
-                description: "The world's largest tropical rainforest and river system."
+                title: "Canyons",
+                category: "land",
+                description: "Deep valleys with very steep sides, often carved by river erosion over millions of years.",
+                fact: "The Grand Canyon is 277 miles long and over a mile deep."
             },
             {
-                name: "Egypt",
-                capital: "Cairo",
-                continent: "Africa",
-                feature: "Great Pyramids of Giza",
-                description: "The oldest of the Seven Wonders of the Ancient World."
+                title: "Glaciers",
+                category: "water",
+                description: "Huge masses of ice that move slowly over land, shaping the landscape.",
+                fact: "Glaciers store about 69% of the world's fresh water."
             },
             {
-                name: "France",
-                capital: "Paris",
-                continent: "Europe",
-                feature: "Eiffel Tower",
-                description: "A global cultural icon of France and architectural marvel."
+                title: "Rainforests",
+                category: "land",
+                description: "Dense forests characterized by high rainfall and incredible biodiversity.",
+                fact: "Rainforests are often called the 'Lungs of the Planet'."
             },
             {
-                name: "Australia",
-                capital: "Canberra",
-                continent: "Oceania",
-                feature: "Great Barrier Reef",
-                description: "The world's largest coral reef system, visible from space."
+                title: "Coral Reefs",
+                category: "water",
+                description: "Underwater ecosystems held together by calcium carbonate structures secreted by corals.",
+                fact: "They support 25% of all marine life despite covering only 1% of the ocean floor."
             },
             {
-                name: "Canada",
-                capital: "Ottawa",
-                continent: "North America",
-                feature: "Niagara Falls",
-                description: "Massive waterfalls renowned for their beauty and power."
+                title: "Waterfalls",
+                category: "water",
+                description: "Rivers or other bodies of water falling over a rocky ledge into a plunge pool below.",
+                fact: "Angel Falls in Venezuela is the highest waterfall in the world."
             },
             {
-                name: "India",
-                capital: "New Delhi",
-                continent: "Asia",
-                feature: "Taj Mahal",
-                description: "An ivory-white marble mausoleum on the Yamuna river."
+                title: "Deserts",
+                category: "land",
+                description: "Barren areas of landscape where little precipitation occurs and conditions are hostile for plant life.",
+                fact: "Antarctica is actually the world's largest desert!"
             }
         ];
 
-        const grid = document.getElementById('nationsGrid');
-        const searchInput = document.getElementById('countrySearch');
+        const grid = document.getElementById('featureGrid');
+        const aiInput = document.getElementById('aiInput');
+        const aiResponse = document.getElementById('aiResponse');
 
-        function displayNations(filter = "") {
+        // Logic to show all features
+        function renderFeatures(filter = "") {
             grid.innerHTML = "";
-            const filtered = nations.filter(n => 
-                n.name.toLowerCase().includes(filter.toLowerCase()) || 
-                n.feature.toLowerCase().includes(filter.toLowerCase()) ||
-                n.continent.toLowerCase().includes(filter.toLowerCase())
+            const filtered = features.filter(f => 
+                f.title.toLowerCase().includes(filter.toLowerCase()) ||
+                f.description.toLowerCase().includes(filter.toLowerCase())
             );
 
-            if (filtered.length === 0) {
-                grid.innerHTML = '<div class="no-results">No nations found matching your search.</div>';
-                return;
-            }
-
-            filtered.forEach(nation => {
+            filtered.forEach(f => {
                 const card = document.createElement('div');
-                card.className = 'nation-card';
+                card.className = 'feature-card';
                 card.innerHTML = `
-                    <h2 class="nation-name">${nation.name}</h2>
-                    <div class="detail-item"><span class="label">Capital:</span> ${nation.capital}</div>
-                    <div class="detail-item"><span class="label">Continent:</span> ${nation.continent}</div>
-                    <p style="font-size: 0.9rem; color: #666;">${nation.description}</p>
-                    <span class="feature-tag">⭐ ${nation.feature}</span>
+                    <div class="feature-info">
+                        <span class="tag category-${f.category}">${f.category}</span>
+                        <h2>${f.title}</h2>
+                        <p>${f.description}</p>
+                        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+                        <p style="font-size:0.85rem; font-style:italic;"><strong>Fun Fact:</strong> ${f.fact}</p>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // Search logic
-        searchInput.addEventListener('input', (e) => {
-            displayNations(e.target.value);
+        // "AI Assistant" Logic
+        aiInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            // Filter the grid based on what user types
+            renderFeatures(query);
+
+            // Simulated AI responses
+            if (query.length > 2) {
+                aiResponse.style.display = "block";
+                
+                // Find a match for the "Assistant" to talk about
+                const match = features.find(f => f.title.toLowerCase().includes(query));
+                
+                if (match) {
+                    aiResponse.innerHTML = `<strong>Assistant:</strong> I see you are interested in ${match.title}! Did you know? ${match.fact}`;
+                } else {
+                    aiResponse.innerHTML = `<strong>Assistant:</strong> I'm searching my nature database for "${query}"... keep typing to find specific features!`;
+                }
+            } else {
+                aiResponse.style.display = "none";
+            }
         });
 
-        // Initial display
-        displayNations();
+        // Initialize the page
+        renderFeatures();
     </script>
 </body>
 </html>
