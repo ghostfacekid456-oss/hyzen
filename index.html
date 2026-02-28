@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earthly - AI Nature Guide</title>
+    <title>Earthly - Ryzen James Ruzige</title>
     <style>
         :root {
-            --nature-green: #27ae60;
-            --ocean-blue: #2980b9;
-            --earth-brown: #795548;
-            --sky-purple: #8e44ad;
-            --ice-blue: #00bcd4;
-            --lava-red: #e67e22;
-            --bg: #f0f4f0;
+            --nature-green: #2ecc71;
+            --ocean-blue: #3498db;
+            --earth-brown: #e67e22;
+            --sky-purple: #9b59b6;
+            --ice-blue: #1abc9c;
+            --lava-red: #e74c3c;
+            --bg: #f8faf8;
             --card-bg: #ffffff;
             --text: #2c3e50;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --ryzen-gold: #f1c40f;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
@@ -29,130 +31,132 @@
         }
 
         header {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
             color: white;
             width: 100%;
-            padding: 60px 20px;
+            padding: 120px 20px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        header h1 { font-size: 3.5rem; margin: 0; letter-spacing: -1px; }
+        .owner-badge {
+            background: var(--nature-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
         }
 
         .ai-box {
             background: white;
             width: 90%;
-            max-width: 800px;
-            margin: -40px auto 30px;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 850px;
+            margin: -60px auto 40px;
+            padding: 35px;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
             position: relative;
             z-index: 10;
+            text-align: center;
         }
 
-        .ai-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: var(--nature-green);
-            font-weight: bold;
+        .owner-intro {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
-
-        .ai-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--nature-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-        }
+        
+        .owner-intro h2 { font-size: 1.8rem; color: #1a2a1a; margin-bottom: 5px; }
+        .owner-intro p { color: var(--nature-green); font-weight: 600; font-size: 1.1rem; }
 
         .input-group {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         #aiInput {
             flex-grow: 1;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 12px;
+            padding: 18px 24px;
+            border: 2px solid #f0f0f0;
+            border-radius: 16px;
             font-size: 1rem;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
-        #aiInput:focus { border-color: var(--nature-green); }
+        #aiInput:focus { border-color: var(--nature-green); background: #f9fff9; }
 
         #askBtn {
             background: var(--nature-green);
             color: white;
             border: none;
-            padding: 0 25px;
-            border-radius: 12px;
+            padding: 0 32px;
+            border-radius: 16px;
             cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
+            font-weight: 700;
+            transition: 0.3s;
         }
 
-        #aiResponse {
-            margin-top: 20px;
-            padding: 20px;
-            background: #fdfdfd;
-            border-radius: 12px;
-            border-left: 5px solid var(--nature-green);
-            display: none;
-            line-height: 1.6;
-            max-height: 400px;
-            overflow-y: auto;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        #askBtn:hover {
+            background: #27ae60;
+            transform: scale(1.02);
         }
 
         .timeline-section {
-            width: 95%;
-            max-width: 1400px;
-            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin-bottom: 80px;
         }
 
         .section-title {
-            padding: 10px 20px;
-            background: #fff;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border-left: 8px solid var(--nature-green);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: #1a2a1a;
+            border-bottom: 4px solid var(--nature-green);
+            display: inline-block;
+            padding-bottom: 10px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
-            width: 100%;
         }
 
         .feature-card {
             background: white;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            border: 1px solid #eee;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .feature-card:hover { transform: translateY(-5px); }
-        .feature-info { padding: 20px; flex-grow: 1; }
+        .feature-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .feature-info { padding: 20px; }
 
         .tag {
             font-size: 0.7rem;
@@ -167,143 +171,116 @@
 
         .category-water { background: var(--ocean-blue); }
         .category-land { background: var(--earth-brown); }
-        .category-phenomena { background: var(--sky-purple); }
         .category-ice { background: var(--ice-blue); }
         .category-tectonic { background: var(--lava-red); }
 
-        h2 { margin: 5px 0 10px; font-size: 1.1rem; color: var(--text); }
-        .location { font-size: 0.75rem; color: #888; margin-bottom: 8px; display: block; }
-        p { color: #555; line-height: 1.5; font-size: 0.85rem; margin: 5px 0; }
+        .location { font-size: 0.8rem; color: #888; margin-bottom: 5px; display: block; }
+        h4 { margin: 0 0 10px; font-size: 1.2rem; }
+        p { font-size: 0.9rem; color: #555; line-height: 1.5; }
 
-        .scientific-fact {
-            font-size: 0.75rem;
-            border-top: 1px solid #f0f0f0;
-            margin-top: 10px;
-            padding-top: 10px;
-            font-style: italic;
-            color: #666;
-        }
-
+        /* RYZEN GRAPHICS FOOTER */
         footer {
             width: 100%;
+            padding: 60px 20px;
+            background: #0f170f;
+            color: white;
             text-align: center;
-            padding: 40px 20px;
-            background: #fff;
-            color: #888;
+            border-top: 5px solid var(--nature-green);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: white;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-logo span {
+            color: var(--nature-green);
+        }
+
+        .footer-tagline {
             font-size: 0.9rem;
-            border-top: 1px solid #eee;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .footer-divider {
+            width: 50px;
+            height: 2px;
+            background: var(--nature-green);
+            margin: 20px auto;
+        }
+
+        .owner-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #ddd;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Earthly Nature Guide</h1>
-        <p>A Chronological Explorer of 100+ Advanced Natural Wonders</p>
+        <h1>Nature's Masterpieces</h1>
+        <div class="owner-badge">Curated by Ryzen James Ruzige</div>
     </header>
 
     <div class="ai-box">
-        <div class="ai-header">
-            <div class="ai-avatar">🌿</div>
-            <span>Nature Expert AI</span>
+        <div class="owner-intro">
+            <h2>The Explorer's Portal</h2>
+            <p>Discover the Earth with Ryzen James Ruzige</p>
         </div>
         <div class="input-group">
-            <input type="text" id="aiInput" placeholder="Search by name (e.g. Mariana Trench, Blood Falls)...">
-            <button id="askBtn">Ask Expert</button>
+            <input type="text" id="aiInput" placeholder="Search for a wonder (e.g. 'Everest', 'Reef')...">
+            <button id="askBtn">Explore</button>
         </div>
-        <div id="aiResponse"></div>
+        <div id="aiResponse" style="margin-top:20px; display:none; text-align:left; padding:15px; background:#f0f7f0; border-radius:10px;"></div>
     </div>
 
     <div id="timelineContainer"></div>
 
     <footer>
-        &copy; 2024 Earthly Nature Project - Educational Resource for Students
+        <div class="footer-logo">RYZEN <span>GRAPHICS</span></div>
+        <div class="footer-tagline">Visualizing the Natural World</div>
+        <div class="footer-divider"></div>
+        <p class="owner-name">Design & Content by Ryzen James Ruzige</p>
+        <p style="font-size: 0.8rem; color: #555; margin-top: 10px;">&copy; 2024 All Rights Reserved</p>
     </footer>
 
     <script>
         const featureData = [
             {
-                section: "I. Advanced Geological & Tectonic Features",
+                section: "Colossal Summits",
                 items: [
-                    { title: "San Andreas Fault", location: "USA", category: "tectonic", description: "A major transform boundary between the Pacific and North American plates.", fact: "The fault is moving at about the rate your fingernails grow.", keywords: ["san andreas", "fault"] },
-                    { title: "Great Rift Valley", location: "Africa", category: "tectonic", description: "A massive geological rift system formed by the divergence of tectonic plates.", fact: "It is one of the only geological features visible from outer space.", keywords: ["rift valley"] },
-                    { title: "Mariana Trench", location: "Pacific Ocean", category: "water", description: "The deepest part of the world's oceans, formed by subduction.", fact: "The pressure at the bottom is over 1,000 times standard atmospheric pressure.", keywords: ["mariana", "trench"] },
-                    { title: "Mid-Atlantic Ridge", location: "Atlantic Ocean", category: "tectonic", description: "A massive underwater mountain range formed by a divergent plate boundary.", fact: "It is the longest mountain range on Earth, spanning 10,000 miles.", keywords: ["mid-atlantic", "ridge"] },
-                    { title: "Himalayan Orogen", location: "Asia", category: "tectonic", description: "The ongoing mountain-building process caused by continental collision.", fact: "The collision started 50 million years ago and is still active today.", keywords: ["himalayan", "mountains"] }
+                    { title: "Mount Everest", location: "Nepal/China", category: "land", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80", description: "The highest point on Earth, standing at 29,032 feet above sea level.", fact: "It grows about 4mm taller every year due to tectonic shifts." },
+                    { title: "Mount Kilimanjaro", location: "Tanzania", category: "land", image: "https://images.unsplash.com/photo-1589553416260-1710c9164088?auto=format&fit=crop&w=600&q=80", description: "The highest free-standing mountain in the world and a dormant volcano.", fact: "It has three volcanic cones: Kibo, Mawenzi, and Shira." }
                 ]
             },
             {
-                section: "II. Geothermal, Volcanic, & Seismic Wonders",
+                section: "Aquatic Marvels",
                 items: [
-                    { title: "Yellowstone Caldera", location: "USA", category: "tectonic", description: "A supervolcano hotspot responsible for massive geothermal activity.", fact: "The underground magma chamber is estimated to be 37 miles long.", keywords: ["yellowstone", "caldera"] },
-                    { title: "Kawah Ijen Crater", location: "Indonesia", category: "tectonic", description: "A volcanic crater famous for its electric blue flames.", fact: "The 'blue lava' is actually burning sulfur gas reaching 600°C.", keywords: ["kawah ijen", "blue fire"] },
-                    { title: "Stromboli Volcano", location: "Italy", category: "tectonic", description: "Known as the 'Lighthouse of the Mediterranean' for its constant eruptions.", fact: "It has been erupting almost non-stop for over 2,000 years.", keywords: ["stromboli"] },
-                    { title: "Dallol Hydrothermal Field", location: "Ethiopia", category: "phenomena", description: "An otherworldly landscape of salt chimneys and acid ponds.", fact: "It has the highest average temperature of any inhabited place on Earth.", keywords: ["dallol"] }
+                    { title: "Great Barrier Reef", location: "Australia", category: "water", image: "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?auto=format&fit=crop&w=600&q=80", description: "The world's largest coral reef system, visible even from outer space.", fact: "It is composed of over 2,900 individual reefs." },
+                    { title: "Victoria Falls", location: "Zambia/Zimbabwe", category: "water", image: "https://images.unsplash.com/photo-1629124403816-1f7292211e93?auto=format&fit=crop&w=600&q=80", description: "Known as 'The Smoke That Thunders', it is the largest curtain of falling water.", fact: "The noise of the water can be heard from 40km away." }
                 ]
             },
             {
-                section: "III. Canyons, Caves, & Karst Landscapes",
+                section: "Deep Earth & Ice",
                 items: [
-                    { title: "Hang Sơn Đoòng", location: "Vietnam", category: "land", description: "The world's largest known cave passage, featuring its own ecosystem.", fact: "A Boeing 747 could fly through the largest parts of the cave.", keywords: ["son doong", "cave"] },
-                    { title: "Marble Caves", location: "Chile", category: "land", description: "Azure-colored marble sculpted by wave action on General Carrera Lake.", fact: "The calcium carbonate walls have been polished by water for 6,000 years.", keywords: ["marble caves"] },
-                    { title: "Cenote Angelita", location: "Mexico", category: "water", description: "A cenote with a unique underwater river effect.", fact: "The 'river' is a layer of hydrogen sulfide gas between fresh and salt water.", keywords: ["cenote", "angelita"] },
-                    { title: "Cave of the Crystals", location: "Mexico", category: "land", description: "Contains giant selenite crystals, some of the largest ever found.", fact: "The humidity in the cave is nearly 100% and it stays around 58°C.", keywords: ["crystals", "naica"] }
+                    { title: "Grand Canyon", location: "Arizona, USA", category: "tectonic", image: "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=600&q=80", description: "A massive gorge carved by the Colorado River over millions of years.", fact: "The canyon exposes nearly two billion years of Earth's history." },
+                    { title: "Perito Moreno Glacier", location: "Argentina", category: "ice", image: "https://images.unsplash.com/photo-1513028738826-f083face353e?auto=format&fit=crop&w=600&q=80", description: "One of the few glaciers in the world that is actually still growing.", fact: "It is the world's third largest reserve of fresh water." }
                 ]
             },
             {
-                section: "IV. Unique Sedimentary & Erosional Landforms",
+                section: "Unique Landscapes",
                 items: [
-                    { title: "Zhangye Danxia", location: "China", category: "land", description: "'Rainbow Mountains' formed from layers of colored sandstone.", fact: "The colors look like a painting but are natural mineral deposits.", keywords: ["danxia", "rainbow"] },
-                    { title: "Giant's Causeway", location: "Northern Ireland", category: "land", description: "40,000 interlocking basalt columns from ancient volcanic activity.", fact: "Most of the columns are perfectly hexagonal.", keywords: ["giants causeway", "basalt"] },
-                    { title: "Salar de Uyuni", location: "Bolivia", category: "land", description: "The world's largest salt flat, formed by evaporated prehistoric lakes.", fact: "When covered in water, it becomes the world's largest natural mirror.", keywords: ["uyuni", "salt flat"] }
-                ]
-            },
-            {
-                section: "V. Glacial & Polar Landscapes",
-                items: [
-                    { title: "Antarctic Ice Sheet", location: "Antarctica", category: "ice", description: "The largest single mass of ice on Earth.", fact: "It contains enough water to raise global sea levels by 190 feet.", keywords: ["antarctic", "ice"] },
-                    { title: "Perito Moreno Glacier", location: "Argentina", category: "ice", description: "One of the few glaciers in the world that is still advancing.", fact: "It is the world's third largest reserve of fresh water.", keywords: ["perito moreno"] },
-                    { title: "Vatnajökull Ice Cap", location: "Iceland", category: "ice", description: "The largest glacier in Europe by volume.", fact: "Active volcanoes like Grímsvötn lie directly beneath the ice.", keywords: ["vatnajokull"] }
-                ]
-            },
-            {
-                section: "VI. Marine, Coastal, & Aquatic Phenomena",
-                items: [
-                    { title: "Great Blue Hole", location: "Belize", category: "water", description: "A massive underwater sinkhole formed during past ice ages.", fact: "It is over 400 feet deep and circular in shape.", keywords: ["blue hole"] },
-                    { title: "Bioluminescent Bay", location: "Puerto Rico", category: "phenomena", description: "A bay where water glows blue when disturbed.", fact: "The light is a defense mechanism for tiny organisms called dinoflagellates.", keywords: ["bioluminescent"] },
-                    { title: "Underwater Waterfall", location: "Mauritius", category: "phenomena", description: "An optical illusion created by sand deposits.", fact: "It is actually sand being pushed off an underwater shelf by currents.", keywords: ["mauritius", "waterfall"] }
-                ]
-            },
-            {
-                section: "VII. Desert & Arid Landscape Features",
-                items: [
-                    { title: "Atacama Desert", location: "Chile", category: "land", description: "The driest non-polar desert in the world.", fact: "Some weather stations here have never recorded a drop of rain.", keywords: ["atacama"] },
-                    { title: "Skeleton Coast", location: "Namibia", category: "land", description: "Where sand dunes meet the Atlantic, littered with shipwrecks.", fact: "The thick ocean fogs make it one of the most dangerous coasts.", keywords: ["skeleton coast"] },
-                    { title: "White Sands", location: "USA", category: "land", description: "The world's largest gypsum dunefield.", fact: "Gypsum doesn't absorb heat, so you can walk on it barefoot even in summer.", keywords: ["white sands"] }
-                ]
-            },
-            {
-                section: "VIII. Rainforest, Forest, & Ecological Marvels",
-                items: [
-                    { title: "Amazon Rainforest", location: "South America", category: "land", description: "The world's largest tropical rainforest.", fact: "One in ten known species on Earth lives in the Amazon.", keywords: ["amazon"] },
-                    { title: "Pando Aspen Grove", location: "USA", category: "land", description: "A massive clonal colony of a single quaking aspen tree.", fact: "The entire forest shares a single underground root system.", keywords: ["pando", "aspen"] },
-                    { title: "Sequoia National Park", location: "USA", category: "land", description: "Home to the world's largest trees by volume.", fact: "General Sherman is the largest known living single-stem tree on Earth.", keywords: ["sequoia"] }
-                ]
-            },
-            {
-                section: "IX. Rare & Unique Phenomena",
-                items: [
-                    { title: "Catatumbo Lightning", location: "Venezuela", category: "phenomena", description: "Lightning strikes continuously for hours, 300 nights a year.", fact: "It acts as a natural lighthouse for sailors in the region.", keywords: ["catatumbo", "lightning"] },
-                    { title: "Aurora Borealis", location: "Polar Regions", category: "phenomena", description: "Light displays caused by solar wind hitting the atmosphere.", fact: "The different colors indicate different types of gas particles.", keywords: ["aurora", "northern lights"] },
-                    { title: "Blood Falls", location: "Antarctica", category: "phenomena", description: "Iron-oxide-rich saltwater flowing from a glacier.", fact: "The water turns red when it touches oxygen in the air.", keywords: ["blood falls"] }
-                ]
-            },
-            {
-                section: "X. Rivers, Lakes, & Complex Water Systems",
-                items: [
-                    { title: "Lake Baikal", location: "Russia", category: "water", description: "The deepest, oldest, and most voluminous freshwater lake.", fact: "If all other freshwater dried up, Baikal could supply the world for 40 years.", keywords: ["baikal"] },
-                    { title: "Victoria Falls", location: "Africa", category: "water", description: "One of the largest waterfalls in the world.", fact: "Local tribes call it 'Mosi-oa-Tunya' or 'The Smoke That Thunders'.", keywords: ["victoria falls"] },
-                    { title: "Lake Titicaca", location: "Peru/Bolivia", category: "water", description: "The highest navigable lake in the world.", fact: "It sits at an altitude of 12,507 feet above sea level.", keywords: ["titicaca"] }
+                    { title: "Salar de Uyuni", location: "Bolivia", category: "land", image: "https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=600&q=80", description: "The world's largest salt flat, creating a perfect mirror when covered in water.", fact: "It contains 50% to 70% of the world's known lithium reserves." },
+                    { title: "Pamukkale", location: "Turkey", category: "water", image: "https://images.unsplash.com/photo-1527113427923-01777265a78f?auto=format&fit=crop&w=600&q=80", description: "Stunning white travertine terraces filled with mineral-rich thermal waters.", fact: "The name literally means 'Cotton Castle' in Turkish." }
                 ]
             }
         ];
@@ -313,87 +290,44 @@
         const askBtn = document.getElementById('askBtn');
         const aiResponse = document.getElementById('aiResponse');
 
-        function renderTimeline(filter = "") {
+        function render(filter = "") {
             container.innerHTML = "";
-            const searchTerm = filter.toLowerCase().trim();
-
-            featureData.forEach(section => {
-                const filteredItems = section.items.filter(item => 
-                    item.title.toLowerCase().includes(searchTerm) ||
-                    item.description.toLowerCase().includes(searchTerm) ||
-                    item.keywords.some(k => k.includes(searchTerm))
-                );
-
-                if (filteredItems.length > 0) {
-                    const sectionEl = document.createElement('div');
-                    sectionEl.className = 'timeline-section';
-                    sectionEl.innerHTML = `<div class="section-title"><h3>${section.section}</h3></div>`;
-                    
-                    const gridEl = document.createElement('div');
-                    gridEl.className = 'grid';
-
-                    filteredItems.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'feature-card';
-                        card.innerHTML = `
-                            <div class="feature-info">
-                                <span class="tag category-${item.category}">${item.category}</span>
-                                <span class="location">${item.location}</span>
-                                <h2>${item.title}</h2>
-                                <p>${item.description}</p>
-                                <p class="scientific-fact"><strong>Scientific Fact:</strong> ${item.fact}</p>
-                            </div>
-                        `;
-                        gridEl.appendChild(card);
+            const term = filter.toLowerCase();
+            featureData.forEach(sec => {
+                const items = sec.items.filter(i => i.title.toLowerCase().includes(term));
+                if (items.length > 0) {
+                    const s = document.createElement('div');
+                    s.className = 'timeline-section';
+                    s.innerHTML = `<div class="section-title"><h3>${sec.section}</h3></div>`;
+                    const g = document.createElement('div');
+                    g.className = 'grid';
+                    items.forEach(i => {
+                        g.innerHTML += `
+                            <div class="feature-card">
+                                <div class="feature-img" style="background-image:url('${i.image}')"></div>
+                                <div class="feature-info">
+                                    <span class="tag category-${i.category}">${i.category}</span>
+                                    <span class="location">${i.location}</span>
+                                    <h4>${i.title}</h4>
+                                    <p>${i.description}</p>
+                                    <p style="font-size:0.8rem; color:var(--nature-green); margin-top:10px;"><strong>Fact:</strong> ${i.fact}</p>
+                                </div>
+                            </div>`;
                     });
-
-                    sectionEl.appendChild(gridEl);
-                    container.appendChild(sectionEl);
+                    s.appendChild(g);
+                    container.appendChild(s);
                 }
             });
         }
 
-        function handleAI() {
-            const query = aiInput.value.toLowerCase().trim();
-            if (!query) return;
-
+        askBtn.onclick = () => {
+            const val = aiInput.value;
             aiResponse.style.display = "block";
-            aiResponse.innerHTML = "<em>Accessing geological records...</em>";
+            aiResponse.innerHTML = `<strong>Ryzen's Explorer AI:</strong> Showing results for "${val}"...`;
+            render(val);
+        };
 
-            setTimeout(() => {
-                let foundMatch = null;
-                featureData.forEach(section => {
-                    const match = section.items.find(item => 
-                        query.includes(item.title.toLowerCase()) || 
-                        item.keywords.some(k => query.includes(k))
-                    );
-                    if (match) foundMatch = match;
-                });
-
-                if (foundMatch) {
-                    aiResponse.innerHTML = `
-                        <strong>Expert Response:</strong> You are asking about the <strong>${foundMatch.title}</strong>! 
-                        <br><br>
-                        This is a <strong>${foundMatch.category}</strong> wonder found in <strong>${foundMatch.location}</strong>. 
-                        ${foundMatch.description} 
-                        <br><br>
-                        <strong>Discovery Fact:</strong> ${foundMatch.fact}
-                    `;
-                } else {
-                    aiResponse.innerHTML = `
-                        <strong>Expert Response:</strong> I don't see a specific record for that, but I can tell you about 
-                        <strong>Plate Tectonics, Glacial Advancement, or Atmospheric Phenomena</strong>. 
-                        Try searching for names like "Mariana Trench" or "Blood Falls".
-                    `;
-                }
-                renderTimeline(query);
-            }, 600);
-        }
-
-        askBtn.addEventListener('click', handleAI);
-        aiInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleAI(); });
-
-        renderTimeline();
+        render();
     </script>
 </body>
 </html>
