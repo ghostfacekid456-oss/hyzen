@@ -1,0 +1,95 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Website</title>
+    <style>
+        /* This section makes your website look pretty */
+        :root {
+            --primary-color: #4a90e2;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 { color: var(--primary-color); }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p>I built this website and hosted it on GitHub.</p>
+        
+        <!-- Interactive button -->
+        <button id="magicButton">Click for Magic</button>
+        
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // This section adds the "brain" to your website
+        const btn = document.getElementById('magicButton');
+        const msg = document.getElementById('message');
+        
+        const surprises = [
+            "✨ You're a coding rockstar!",
+            "🚀 To infinity and beyond!",
+            "💻 Coding is a superpower.",
+            "🌟 Keep learning every day!"
+        ];
+
+        btn.addEventListener('click', () => {
+            const randomIdx = Math.floor(Math.random() * surprises.length);
+            msg.textContent = surprises[randomIdx];
+            
+            // Change background color randomly too!
+            const hue = Math.floor(Math.random() * 360);
+            document.body.style.backgroundColor = `hsl(${hue}, 70%, 90%)`;
+        });
+    </script>
+</body>
+</html>
