@@ -1,131 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ShoppingBag, 
   Menu, 
   X, 
   ChevronRight, 
-  Star, 
-  Instagram, 
-  Facebook, 
-  Twitter,
   Heart,
   Search,
   Volume2,
-  VolumeX
+  VolumeX,
+  Play
 } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoError, setVideoError] = useState(false);
+  
+  // Video loading states to ensure smooth playback
+  const [videosLoaded, setVideosLoaded] = useState({
+    hero: false,
+    story: false
+  });
 
-  // Handle welcome screen timing
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowWelcome(false);
-    }, 3500); // Shows welcome for 3.5 seconds
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Handle scroll effect for navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const timer = setTimeout(() => setShowWelcome(false), 3500);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  const handleVideoLoad = (videoKey) => {
+    setVideosLoaded(prev => ({ ...prev, [videoKey]: true }));
+  };
 
   const products = [
-    {
-      id: 1,
-      name: "Celestial Diamond Ring",
-      price: "$2,450",
-      category: "Rings",
-      image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800",
-      tag: "Best Seller"
-    },
-    {
-      id: 2,
-      name: "Emerald Cascade Earrings",
-      price: "$1,890",
-      category: "Earrings",
-      image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&q=80&w=800",
-      tag: "New Arrival"
-    },
-    {
-      id: 3,
-      name: "Midnight Sapphire Pendant",
-      price: "$3,100",
-      category: "Necklaces",
-      image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800",
-      tag: "Limited"
-    },
-    {
-      id: 4,
-      name: "Rose Gold Unity Bracelet",
-      price: "$950",
-      category: "Bracelets",
-      image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800",
-      tag: ""
-    }
+    { id: 1, name: "Celestial Diamond Ring", price: "$2,450", category: "Rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" },
+    { id: 2, name: "Emerald Cascade Earrings", price: "$1,890", category: "Earrings", image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&q=80&w=800" },
+    { id: 3, name: "Midnight Sapphire Pendant", price: "$3,100", category: "Necklaces", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" },
+    { id: 4, name: "Rose Gold Unity Bracelet", price: "$950", category: "Bracelets", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800" }
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] font-serif text-white overflow-x-hidden">
-      {/* Welcome Intro Overlay */}
+    <div className="min-h-screen bg-[#0a0a0a] font-serif text-white overflow-x-hidden selection:bg-amber-500/30">
+      {/* Welcome Intro */}
       {showWelcome && (
         <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-white transition-opacity duration-1000">
           <div className="text-center animate-pulse">
-            <p className="uppercase tracking-[0.4em] text-xs mb-4 text-amber-500">Aura Presents</p>
-            <h2 className="text-3xl md:text-4xl font-light tracking-widest mb-2">Welcome to</h2>
+            <p className="uppercase tracking-[0.4em] text-[10px] mb-4 text-amber-500">Aura Presents</p>
+            <h2 className="text-2xl md:text-3xl font-light tracking-widest mb-2">Welcome to</h2>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
               RYZEN GRAPHICS CONTENT
             </h1>
           </div>
-          <div className="absolute bottom-12 w-32 h-[1px] bg-white/20 overflow-hidden">
-            <div className="w-full h-full bg-amber-500 origin-left animate-[loading_3s_ease-in-out]" />
-          </div>
-        </div>
-      )}
-
-      {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-500 px-6 py-4 flex items-center justify-between ${
-        scrolled ? 'bg-black/95 backdrop-blur-md shadow-sm py-3 border-b border-white/10' : 'bg-transparent text-white'
-      }`}>
-        <div className="flex items-center gap-4">
-          <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(true)}>
-            <Menu size={24} />
-          </button>
-          <div className="hidden lg:flex gap-8 text-xs uppercase tracking-[0.2em] font-medium">
-            <a href="#" className="hover:text-amber-500 transition-colors">Collections</a>
-            <a href="#" className="hover:text-amber-500 transition-colors">Bespoke</a>
-            <a href="#" className="hover:text-amber-500 transition-colors">Our Story</a>
-          </div>
-        </div>
-
-        <div className="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-light tracking-[0.3em] uppercase">
-          Aura
-        </div>
-
-        <div className="flex items-center gap-5">
-          <Search size={20} className="cursor-pointer hidden sm:block" />
-          <div className="relative cursor-pointer" onClick={() => setCartCount(prev => prev + 1)}>
-            <ShoppingBag size={20} />
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-amber-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
-                {cartCount}
-              </span>
-            )}
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-black p-8 flex flex-col items-center justify-center text-white">
-          <button className="absolute top-6 right-6" onClick={() => setIsMenuOpen
+          <div className="absolute bottom-12 w-48 h-[1px] bg-white/10 overflow-hidden">
+            <div className="w-full h-full bg-amber-500 origin-left animate-loading-
