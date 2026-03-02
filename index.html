@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShoppingBag, 
   Menu, 
@@ -17,8 +17,12 @@ const App = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [showWelcome, setShowWelcome] = useState(true);
   
-  // Video loading states to ensure smooth playback
+  // Video loading and error states
   const [videosLoaded, setVideosLoaded] = useState({
+    hero: false,
+    story: false
+  });
+  const [videoErrors, setVideoErrors] = useState({
     hero: false,
     story: false
   });
@@ -37,6 +41,10 @@ const App = () => {
     setVideosLoaded(prev => ({ ...prev, [videoKey]: true }));
   };
 
+  const handleVideoError = (videoKey) => {
+    setVideoErrors(prev => ({ ...prev, [videoKey]: true }));
+  };
+
   const products = [
     { id: 1, name: "Celestial Diamond Ring", price: "$2,450", category: "Rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" },
     { id: 2, name: "Emerald Cascade Earrings", price: "$1,890", category: "Earrings", image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&q=80&w=800" },
@@ -48,13 +56,4 @@ const App = () => {
     <div className="min-h-screen bg-[#0a0a0a] font-serif text-white overflow-x-hidden selection:bg-amber-500/30">
       {/* Welcome Intro */}
       {showWelcome && (
-        <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-white transition-opacity duration-1000">
-          <div className="text-center animate-pulse">
-            <p className="uppercase tracking-[0.4em] text-[10px] mb-4 text-amber-500">Aura Presents</p>
-            <h2 className="text-2xl md:text-3xl font-light tracking-widest mb-2">Welcome to</h2>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
-              RYZEN GRAPHICS CONTENT
-            </h1>
-          </div>
-          <div className="absolute bottom-12 w-48 h-[1px] bg-white/10 overflow-hidden">
-            <div className="w-full h-full bg-amber-500 origin-left animate-loading-
+        <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-white transition-opacity duration
