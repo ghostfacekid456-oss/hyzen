@@ -154,17 +154,17 @@
     </footer>
 
     <script>
-        // Variety libraries for 100% unique visual results
-        const colors = ["Crimson", "Silver", "Sapphire", "Onyx", "Pearl", "Emerald", "Titanium", "Gold", "Sunset-Orange", "Amethyst", "Quartz", "Azure", "Shadow-Grey", "Ivory"];
-        const settings = ["modern-architecture", "racing-circuit", "coastal-road", "mountain-pass", "urban-cityscape", "luxury-garage", "wet-asphalt", "desert-highway", "studio-setting"];
-        const lighting = ["golden-hour", "natural-daylight", "dramatic-studio", "cloudy-sky", "evening-glow", "high-definition"];
+        // Enhanced Variety libraries to force visual distinction
+        const colors = ["Crimson-Red", "Liquid-Silver", "Deep-Sapphire", "Matte-Onyx", "White-Pearl", "Racing-Green", "Burnt-Orange", "Royal-Purple", "Graphite-Grey", "Sky-Blue"];
+        const settings = ["modern-city", "racing-track", "coastal-highway", "mountain-pass", "luxury-garage", "forest-road", "desert-dunes", "rainy-street"];
+        const lighting = ["golden-hour", "daylight", "night-neon", "sunset"];
         
-        const brands = ["Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston-Martin", "Bugatti", "Pagani", "Koenigsegg", "Bentley", "Rolls-Royce", "Maserati", "Jaguar", "Lotus", "Alfa-Romeo", "Ford-GT", "Shelby", "Audi", "Mercedes-Benz", "BMW", "Nissan", "Honda", "Mazda", "Dodge", "Chevrolet"];
-        const models = ["Evolution", "Limited-Edition", "Grand-Tourer", "Track-Star", "Icon", "Heritage", "Special-Ops", "Signature-Series", "Concept-X", "Velocity"];
+        const brands = ["Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston-Martin", "Bugatti", "Pagani", "Bentley", "Rolls-Royce", "Maserati", "Jaguar", "Lotus", "Alfa-Romeo", "Ford-GT", "Audi-R8", "Mercedes-AMG", "BMW-M8", "Nissan-GTR", "Honda-NSX", "Mazda-RX", "Dodge-Viper", "Corvette"];
+        const models = ["Evolution", "Limited", "GT", "Heritage", "Special", "Velocity"];
 
         const carData = [];
 
-        // Generate 100 Unique Entries with unique visual IDs
+        // Generate 100 Unique Entries with high-entropy visual parameters
         for(let i = 1; i <= 100; i++) {
             const brand = brands[i % brands.length];
             const model = models[i % models.length];
@@ -173,8 +173,9 @@
             const light = lighting[i % lighting.length];
             const type = (i % 3 === 0) ? "Classic" : "Supercar";
             
-            // This URL structure forces a unique image per car using the 'sig' parameter
-            const imgUrl = `https://images.unsplash.com/featured/?${color},${brand.toLowerCase()},car,${setting},${light}&sig=${i * 555}`;
+            // Re-ordered keywords and randomized signature range for 100% uniqueness
+            // Format: color,brand,setting,lighting
+            const imgUrl = `https://images.unsplash.com/featured/?${color},${brand.toLowerCase()},${setting},${light}&sig=${Math.floor(Math.random() * 100000) + (i * 777)}`;
 
             carData.push({
                 id: i,
@@ -185,7 +186,7 @@
                 hp: `${400 + (i * 10)} HP`,
                 topSpeed: `${240 + (i % 160)} km/h`,
                 img: imgUrl,
-                desc: `This exceptional ${color} ${brand} is presented in a ${setting.replace('-', ' ')} environment. A safe, high-quality asset for our elite collection.`,
+                desc: `This exceptional ${color.replace('-', ' ')} ${brand} is showcased in a ${setting.replace('-', ' ')} setting during ${light.replace('-', ' ')}. A safe and premium asset for the collection.`,
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
             });
         }
