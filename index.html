@@ -33,7 +33,7 @@
         .video-container {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 80vh;
             overflow: hidden;
         }
 
@@ -44,7 +44,7 @@
         }
 
         .gradient-overlay {
-            background: linear-gradient(0deg, #0a0a0a 0%, transparent 100%);
+            background: linear-gradient(0deg, #0a0a0a 0%, rgba(10, 10, 10, 0.4) 100%);
         }
 
         .nav-link::after {
@@ -75,31 +75,37 @@
         </a>
     </nav>
 
-    <!-- Hero Section with Video -->
+    <!-- Hero Section with BMW M5 Video -->
     <section id="home" class="video-container">
-        <!-- Using a placeholder video link - replace with your actual MP4 link -->
-        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-1718-large.mp4" type="video/mp4">
+        <!-- Featuring cinematic footage of a sports car/M5 equivalent -->
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-sports-car-driving-away-at-night-34440-large.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-black/50 gradient-overlay flex flex-col justify-center items-center text-center px-4">
-            <h1 class="text-5xl md:text-7xl font-black mb-4 uppercase italic">Pure Performance</h1>
-            <p class="text-xl text-gray-300 max-w-2xl">Experience the pinnacle of automotive engineering at Ryzen Graphics Showroom.</p>
-            <a href="#showroom" class="mt-8 border-2 border-white hover:bg-white hover:text-black px-8 py-3 font-bold transition-all duration-300">
-                EXPLORE COLLECTION
-            </a>
+        <div class="absolute inset-0 bg-black/40 gradient-overlay flex flex-col justify-center items-center text-center px-4">
+            <div class="mb-2 text-rose-600 font-bold tracking-[0.3em] uppercase">Ryzen Graphics Presents</div>
+            <h1 class="text-5xl md:text-8xl font-black mb-4 uppercase italic leading-tight">BMW M5 <br><span class="text-rose-600">Competition</span></h1>
+            <p class="text-xl text-gray-300 max-w-2xl">The ultimate driving machine. Experience unrivaled power and luxury at our exclusive showroom.</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <a href="#showroom" class="bg-white text-black hover:bg-rose-600 hover:text-white px-8 py-3 font-bold transition-all duration-300">
+                    EXPLORE COLLECTION
+                </a>
+                <button onclick="document.getElementById('promo-video').scrollIntoView()" class="border-2 border-white/30 hover:border-white px-8 py-3 font-bold transition-all duration-300 backdrop-blur-sm">
+                    WATCH VIDEO
+                </button>
+            </div>
         </div>
     </section>
 
     <!-- Showroom Grid -->
     <section id="showroom" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-12">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-                <h2 class="text-4xl font-bold mb-2">Inventory</h2>
-                <p class="text-gray-400">Our latest arrivals and exclusive models.</p>
+                <h2 class="text-4xl font-bold mb-2 text-white">The Ryzen Collection</h2>
+                <p class="text-gray-400">Hand-picked excellence, ready for delivery.</p>
             </div>
             <div class="flex space-x-2">
-                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-left"></i></button>
-                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-right"></i></button>
+                <button class="p-3 border border-gray-700 rounded-full hover:bg-gray-800 transition"><i class="fas fa-chevron-left"></i></button>
+                <button class="p-3 border border-gray-700 rounded-full hover:bg-gray-800 transition"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
 
@@ -107,152 +113,3 @@
             <!-- Car cards will be injected here via JS -->
         </div>
     </section>
-
-    <!-- Featured Video Section -->
-    <section class="py-20 bg-zinc-900 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="rounded-3xl overflow-hidden shadow-2xl">
-                <video controls class="w-full">
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-red-sports-car-in-a-parking-lot-4458-large.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div>
-                <span class="text-rose-600 font-bold tracking-widest uppercase">Cinematic Review</span>
-                <h2 class="text-4xl font-bold mt-2 mb-6">Visual Excellence in Motion</h2>
-                <p class="text-gray-400 leading-relaxed mb-6">
-                    Every curve, every sound, and every detail captured to give you a true feel of our premium fleet. Watch our 4K cinematic showcases before you visit.
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> High Performance Specs</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Interior Walkthroughs</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Exhaust Sound Testing</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 text-center">
-        <div class="glass max-w-4xl mx-auto rounded-3xl p-12">
-            <h2 class="text-3xl font-bold mb-4">Visit Ryzen Graphics</h2>
-            <p class="text-gray-400 mb-8">Ready to take the wheel? Schedule a private viewing today.</p>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div>
-                    <i class="fas fa-phone text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Phone</h4>
-                    <p class="text-gray-400">+255 782 687 045</p>
-                </div>
-                <div>
-                    <i class="fas fa-location-dot text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Location</h4>
-                    <p class="text-gray-400">Dar es Salaam, Tanzania</p>
-                </div>
-                <div>
-                    <i class="fas fa-clock text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Hours</h4>
-                    <p class="text-gray-400">Mon - Sat: 9:00 AM - 7:00 PM</p>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://wa.me/255782687045" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-xl font-bold flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Us
-                </a>
-                <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-8 py-3 rounded-xl font-bold">
-                    Direct Call
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>&copy; 2024 Ryzen Graphics. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        const cars = [
-            {
-                name: "Porsche 911 Turbo S",
-                price: "$216,100",
-                img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
-                hp: "640 HP",
-                topSpeed: "205 MPH"
-            },
-            {
-                name: "Mercedes AMG GT",
-                price: "$118,600",
-                img: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80",
-                hp: "523 HP",
-                topSpeed: "194 MPH"
-            },
-            {
-                name: "Audi R8 Performance",
-                price: "$158,600",
-                img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80",
-                hp: "602 HP",
-                topSpeed: "201 MPH"
-            },
-            {
-                name: "BMW M4 Competition",
-                price: "$78,600",
-                img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
-                hp: "503 HP",
-                topSpeed: "180 MPH"
-            },
-            {
-                name: "Lamborghini Huracán",
-                price: "$206,000",
-                img: "https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&w=800&q=80",
-                hp: "631 HP",
-                topSpeed: "202 MPH"
-            },
-            {
-                name: "Ferrari F8 Tributo",
-                price: "$276,000",
-                img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80",
-                hp: "710 HP",
-                topSpeed: "211 MPH"
-            }
-        ];
-
-        const carGrid = document.getElementById('carGrid');
-
-        cars.forEach(car => {
-            const card = document.createElement('div');
-            card.className = "car-card glass rounded-3xl overflow-hidden group";
-            card.innerHTML = `
-                <div class="h-64 overflow-hidden relative">
-                    <img src="${car.img}" alt="${car.name}" class="car-image w-full h-full object-cover">
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-sm">
-                        Available
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-1">${car.name}</h3>
-                    <p class="text-rose-600 font-bold text-lg mb-4">${car.price}</p>
-                    <div class="flex justify-between border-t border-gray-800 pt-4 text-sm text-gray-400">
-                        <div class="text-center">
-                            <p class="text-white font-bold">${car.hp}</p>
-                            <p>Power</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-white font-bold">${car.topSpeed}</p>
-                            <p>Top Speed</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-white font-bold">Auto</p>
-                            <p>Gearbox</p>
-                        </div>
-                    </div>
-                    <button class="w-full mt-6 bg-white text-black font-bold py-3 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition-colors">
-                        View Details
-                    </button>
-                </div>
-            `;
-            carGrid.appendChild(card);
-        });
-    </script>
-</body>
-</html>
