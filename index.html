@@ -73,7 +73,7 @@
 
     <!-- Hero Section -->
     <section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000');"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000');"></div>
         <div class="relative z-10 text-center px-4">
             <h2 class="text-5xl md:text-7xl font-bold mb-4">100 Legends of the Road</h2>
             <p class="text-xl text-gray-300 max-w-2xl mx-auto">A curated digital showroom of the most influential automotive masterpieces in history.</p>
@@ -166,11 +166,13 @@
         // Unique lists for variety
         const luxuryBrands = ["Bentley", "Rolls-Royce", "Maserati", "Alfa Romeo", "Lancia", "Lotus", "De Tomaso", "McLaren", "Porsche", "Ferrari", "Lamborghini", "Bugatti", "Mercedes-Benz", "BMW", "Audi", "Toyota", "Nissan", "Honda", "Mazda", "Ford", "Chevrolet", "Dodge", "Plymouth", "Pontiac"];
         const luxuryModels = ["Continental", "Phantom", "MC20", "Stradale", "Delta Integrale", "Evija", "Pantera", "720S", "Carrera GT", "LaFerrari", "Aventador", "Chiron", "SLS AMG", "M3 E30", "RS6", "Supra", "Skyline R34", "NSX", "RX-7", "GT40", "Corvette C2", "Challenger", "Superbird", "GTO"];
+        const colorVariations = ["red", "blue", "silver", "black", "white", "yellow", "green", "grey", "orange", "gold"];
 
-        // Dynamic addition of unique cars up to 100
+        // Dynamic addition of unique cars up to 100 with varied images
         for(let i = 11; i <= 100; i++) {
             const brand = luxuryBrands[i % luxuryBrands.length];
             const model = luxuryModels[i % luxuryModels.length];
+            const color = colorVariations[i % colorVariations.length];
             const isClassic = i % 3 === 0;
             
             carData.push({
@@ -181,7 +183,8 @@
                 engine: i % 2 === 0 ? "V12 Engine" : "V8 Twin Turbo",
                 hp: `${350 + (i * 10)} HP`,
                 topSpeed: `${240 + (i % 180)} km/h`,
-                img: `https://images.unsplash.com/photo-${1500000000000 + (i * 1234)}?auto=format&fit=crop&q=80&w=800&sig=${i}`,
+                // Improved image logic using source variety and unique signatures to prevent duplicates
+                img: `https://images.unsplash.com/featured/?${color},${brand.toLowerCase()},car&sig=${i}`,
                 desc: `A rare and distinctive ${brand} masterpiece, this ${model} edition showcases the peak of ${isClassic ? 'vintage craftsmanship' : 'modern performance technology'}.`,
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
             });
@@ -197,7 +200,7 @@
                 card.innerHTML = `
                     <div class="h-64 overflow-hidden relative group">
                         <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
-                             onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
                         <div class="absolute top-4 right-4 bg-yellow-600 text-black text-[10px] font-bold px-2 py-1 rounded">${car.type}</div>
                     </div>
                     <div class="p-6">
@@ -259,7 +262,7 @@
                         <iframe class="absolute inset-0 w-full h-full" src="${car.video}" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <img src="${car.img}" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition duration-1000"
-                         onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
                 </div>
             `;
             document.getElementById('carModal').style.display = 'block';
