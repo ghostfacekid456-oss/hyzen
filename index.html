@@ -1,59 +1,200 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  ShoppingBag, 
-  Menu, 
-  X, 
-  ChevronRight, 
-  Heart,
-  Search,
-  Volume2,
-  VolumeX,
-  Play
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Drive | Car Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lexend:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .heading-font {
+            font-family: 'Lexend', sans-serif;
+        }
 
-const App = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [showWelcome, setShowWelcome] = useState(true);
-  
-  // Video loading and error states
-  const [videosLoaded, setVideosLoaded] = useState({
-    hero: false,
-    story: false
-  });
-  const [videoErrors, setVideoErrors] = useState({
-    hero: false,
-    story: false
-  });
+        .car-card:hover .car-overlay {
+            opacity: 1;
+        }
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowWelcome(false), 3500);
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
 
-  const handleVideoLoad = (videoKey) => {
-    setVideosLoaded(prev => ({ ...prev, [videoKey]: true }));
-  };
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-car-side text-blue-600 text-2xl"></i>
+                    <span class="text-xl font-bold heading-font tracking-tight">ELITE<span class="text-blue-600">DRIVE</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
+                    <a href="#home" class="hover:text-blue-600 transition">Home</a>
+                    <a href="#collection" class="hover:text-blue-600 transition">Collection</a>
+                    <a href="#about" class="hover:text-blue-600 transition">About</a>
+                    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  const handleVideoError = (videoKey) => {
-    setVideoErrors(prev => ({ ...prev, [videoKey]: true }));
-  };
+    <!-- Hero Section -->
+    <section id="home" class="relative py-20 lg:py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h1 class="text-5xl lg:text-7xl font-bold heading-font leading-tight mb-6">
+                        Discover the <span class="gradient-text">Future</span> of Performance.
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 max-w-lg">
+                        From sleek electric sedans to high-octane supercars, explore our curated collection of automotive excellence.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#collection" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition shadow-lg shadow-slate-200">Explore Cars</a>
+                        <button class="border border-slate-300 px-8 py-4 rounded-xl font-semibold hover:bg-slate-100 transition">Learn More</button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-blue-600/10 absolute -inset-4 rounded-3xl -rotate-2"></div>
+                    <!-- Placeholder SVG for Hero Image -->
+                    <div class="relative bg-white p-2 rounded-2xl shadow-2xl">
+                        <svg viewBox="0 0 800 500" class="w-full h-auto rounded-xl" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="800" height="500" fill="#f1f5f9"/>
+                            <path d="M150 350 Q400 300 650 350 L630 250 Q400 200 170 250 Z" fill="#334155"/>
+                            <circle cx="230" cy="350" r="40" fill="#1e293b"/>
+                            <circle cx="570" cy="350" r="40" fill="#1e293b"/>
+                            <text x="400" y="450" font-family="Arial" font-size="24" text-anchor="middle" fill="#64748b">Modern Engineering</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  const products = [
-    { id: 1, name: "Celestial Diamond Ring", price: "$2,450", category: "Rings", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" },
-    { id: 2, name: "Emerald Cascade Earrings", price: "$1,890", category: "Earrings", image: "https://images.unsplash.com/photo-1635767798638-3e25273a8236?auto=format&fit=crop&q=80&w=800" },
-    { id: 3, name: "Midnight Sapphire Pendant", price: "$3,100", category: "Necklaces", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" },
-    { id: 4, name: "Rose Gold Unity Bracelet", price: "$950", category: "Bracelets", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800" }
-  ];
+    <!-- Collection Section -->
+    <section id="collection" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold heading-font mb-4">Our Premium Fleet</h2>
+                <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
 
-  return (
-    <div className="min-h-screen bg-[#0a0a0a] font-serif text-white overflow-x-hidden selection:bg-amber-500/30">
-      {/* Welcome Intro */}
-      {showWelcome && (
-        <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center text-white transition-opacity duration
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Car Card 1 -->
+                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
+                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
+                        <i class="fas fa-bolt text-5xl text-blue-500 opacity-50"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold heading-font">Electric Sedans</h3>
+                        <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">EV</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        Sustainable luxury with instant torque and cutting-edge autonomous features.
+                    </p>
+                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> 400+ Mile Range</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> 0-60 in 2.4s</li>
+                    </ul>
+                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
+                </div>
+
+                <!-- Car Card 2 -->
+                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
+                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
+                        <i class="fas fa-mountain text-5xl text-orange-500 opacity-50"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold heading-font">Off-Road SUVs</h3>
+                        <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded">4X4</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        Unmatched durability for the adventurer who refuses to compromise on comfort.
+                    </p>
+                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Adaptive Suspension</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> All-Terrain Modes</li>
+                    </ul>
+                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
+                </div>
+
+                <!-- Car Card 3 -->
+                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
+                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
+                        <i class="fas fa-tachometer-alt text-5xl text-red-500 opacity-50"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold heading-font">Supercars</h3>
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">PRO</span>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                        Aerodynamic masterpieces designed to blur the line between road and track.
+                    </p>
+                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> V12 Twin Turbo</li>
+                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Carbon Fiber Body</li>
+                    </ul>
+                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fas fa-car-side text-blue-400 text-2xl"></i>
+                        <span class="text-xl font-bold heading-font tracking-tight">ELITE<span class="text-blue-400">DRIVE</span></span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Leading the world in automotive curation and digital experiences for car enthusiasts globally.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 heading-font uppercase text-xs tracking-widest text-slate-500">Quick Links</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition">Inventory</a></li>
+                        <li><a href="#" class="hover:text-white transition">Financing</a></li>
+                        <li><a href="#" class="hover:text-white transition">Test Drive</a></li>
+                        <li><a href="#" class="hover:text-white transition">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 heading-font uppercase text-xs tracking-widest text-slate-500">Newsletter</h4>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Enter email" class="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-2 focus:ring-blue-500">
+                        <button class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Branding -->
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-xs">
+                    &copy; 2024 Elite Drive Automotive. All rights reserved.
+                </p>
+                <div class="text-slate-300 font-bold tracking-widest text-sm heading-font uppercase">
+                    ryzen graphics
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
