@@ -22,18 +22,27 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .car-card:hover .car-image {
-            transform: scale(1.05);
+        .car-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .car-image {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .car-card:hover .car-image {
+            transform: scale(1.1);
         }
 
         .video-container {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 80vh;
             overflow: hidden;
         }
 
@@ -44,7 +53,7 @@
         }
 
         .gradient-overlay {
-            background: linear-gradient(0deg, #0a0a0a 0%, transparent 100%);
+            background: linear-gradient(0deg, #0a0a0a 0%, rgba(10, 10, 10, 0.4) 50%, transparent 100%);
         }
 
         .nav-link::after {
@@ -58,6 +67,25 @@
         .nav-link:hover::after {
             width: 100%;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e11d48;
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 0 0 2px #e11d48;
+        }
     </style>
 </head>
 <body>
@@ -70,189 +98,323 @@
             <a href="#showroom" class="nav-link">Showroom</a>
             <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-5 py-2 rounded-full text-sm font-bold transition">
-            Call Now
-        </a>
+        <div class="flex items-center gap-4">
+            <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-5 py-2 rounded-full text-sm font-bold transition flex items-center gap-2">
+                <i class="fas fa-phone-alt"></i> <span class="hidden sm:inline">Call Now</span>
+            </a>
+        </div>
     </nav>
 
-    <!-- Hero Section with Video -->
+    <!-- Hero Section -->
     <section id="home" class="video-container">
-        <!-- Using a placeholder video link - replace with your actual MP4 link -->
-        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80">
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-1718-large.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-black/50 gradient-overlay flex flex-col justify-center items-center text-center px-4">
-            <h1 class="text-5xl md:text-7xl font-black mb-4 uppercase italic">Pure Performance</h1>
-            <p class="text-xl text-gray-300 max-w-2xl">Experience the pinnacle of automotive engineering at Ryzen Graphics Showroom.</p>
-            <a href="#showroom" class="mt-8 border-2 border-white hover:bg-white hover:text-black px-8 py-3 font-bold transition-all duration-300">
-                EXPLORE COLLECTION
+        <div class="absolute inset-0 bg-black/40 gradient-overlay flex flex-col justify-center items-center text-center px-4">
+            <span class="text-rose-600 font-bold tracking-[0.3em] uppercase mb-4">Elite Automotive Collection</span>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 uppercase italic leading-none">The Ultimate<br>100 Icons</h1>
+            <p class="text-xl text-gray-300 max-w-2xl font-light">From timeless European masterpieces to modern hypercar disruptors. Explore the finest curated fleet in the world.</p>
+            <a href="#showroom" class="mt-10 bg-white text-black hover:bg-rose-600 hover:text-white px-10 py-4 font-black transition-all duration-300 rounded-sm">
+                VIEW SHOWROOM
             </a>
         </div>
     </section>
 
-    <!-- Showroom Grid -->
-    <section id="showroom" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <h2 class="text-4xl font-bold mb-2">Inventory</h2>
-                <p class="text-gray-400">Our latest arrivals and exclusive models.</p>
+    <!-- Showroom Section -->
+    <section id="showroom" class="py-24 px-6 max-w-[1600px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-5xl font-black mb-2 italic">THE COLLECTION</h2>
+                <p class="text-gray-400">Discover 100 of the most significant cars ever engineered.</p>
             </div>
-            <div class="flex space-x-2">
-                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-left"></i></button>
-                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-right"></i></button>
+            
+            <div class="relative w-full max-w-md">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <input type="text" id="carSearch" placeholder="Search by name or category..." 
+                    class="search-bar w-full bg-zinc-900 border border-zinc-800 rounded-full py-4 pl-12 pr-6 text-white focus:outline-none transition-all">
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="carGrid">
-            <!-- Car cards will be injected here via JS -->
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="filterContainer">
+            <button class="filter-btn active bg-rose-600 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="all">All 100</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="Legend">Legends</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="Modern">Modern Hits</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="European">European</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="Japanese">Japanese</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="American">American Muscle</button>
+            <button class="filter-btn bg-zinc-800 hover:bg-zinc-700 px-6 py-2 rounded-full text-sm font-bold transition" data-filter="Hyper">Hypercars</button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="carGrid">
+            <!-- 100 Cars will be injected here -->
         </div>
     </section>
 
-    <!-- Featured Video Section -->
-    <section class="py-20 bg-zinc-900 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="rounded-3xl overflow-hidden shadow-2xl">
-                <video controls class="w-full">
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-red-sports-car-in-a-parking-lot-4458-large.mp4" type="video/mp4">
-                </video>
+    <!-- Cinematic Featured Video -->
+    <section class="py-24 bg-zinc-950 px-6 border-y border-zinc-900">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-rose-600/20 blur-2xl group-hover:bg-rose-600/30 transition duration-1000"></div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-video border border-white/10">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-red-sports-car-in-a-parking-lot-4458-large.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
             <div>
-                <span class="text-rose-600 font-bold tracking-widest uppercase">Cinematic Review</span>
-                <h2 class="text-4xl font-bold mt-2 mb-6">Visual Excellence in Motion</h2>
-                <p class="text-gray-400 leading-relaxed mb-6">
-                    Every curve, every sound, and every detail captured to give you a true feel of our premium fleet. Watch our 4K cinematic showcases before you visit.
+                <span class="text-rose-600 font-black tracking-widest uppercase text-sm">Now Playing</span>
+                <h2 class="text-5xl font-black mt-4 mb-8 italic">CINEMATIC PERFORMANCE</h2>
+                <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                    Experience the raw emotion of these 100 masterpieces. Our visual showcases capture every detail from the roar of a V12 to the sleek lines of 2026's newest hypercars.
                 </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> High Performance Specs</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Interior Walkthroughs</li>
-                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Exhaust Sound Testing</li>
-                </ul>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="flex items-center gap-3 text-sm font-bold"><i class="fas fa-video text-rose-600"></i> 4K HDR Quality</div>
+                    <div class="flex items-center gap-3 text-sm font-bold"><i class="fas fa-volume-up text-rose-600"></i> Dolby Sound</div>
+                    <div class="flex items-center gap-3 text-sm font-bold"><i class="fas fa-bolt text-rose-600"></i> Zero Lag Stream</div>
+                    <div class="flex items-center gap-3 text-sm font-bold"><i class="fas fa-expand text-rose-600"></i> Full Walkthroughs</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-24 px-6 text-center">
-        <div class="glass max-w-4xl mx-auto rounded-3xl p-12">
-            <h2 class="text-3xl font-bold mb-4">Visit Ryzen Graphics</h2>
-            <p class="text-gray-400 mb-8">Ready to take the wheel? Schedule a private viewing today.</p>
+        <div class="glass max-w-5xl mx-auto rounded-[3rem] p-16 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-rose-600/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
             
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div>
-                    <i class="fas fa-phone text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Phone</h4>
-                    <p class="text-gray-400">+255 782 687 045</p>
+            <h2 class="text-5xl font-black mb-6 italic">GET IN TOUCH</h2>
+            <p class="text-gray-400 mb-12 text-lg max-w-2xl mx-auto">Ready to experience these legends in person? Contact Ryzen Graphics for exclusive viewings and consultations.</p>
+            
+            <div class="grid md:grid-cols-3 gap-12 mb-16">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center mb-4 border border-zinc-800">
+                        <i class="fas fa-phone-alt text-2xl text-rose-600"></i>
+                    </div>
+                    <h4 class="font-black text-xl mb-2">Call Direct</h4>
+                    <p class="text-rose-600 font-bold text-lg">+255 782 687 045</p>
                 </div>
-                <div>
-                    <i class="fas fa-location-dot text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Location</h4>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center mb-4 border border-zinc-800">
+                        <i class="fas fa-map-marker-alt text-2xl text-rose-600"></i>
+                    </div>
+                    <h4 class="font-black text-xl mb-2">Showroom</h4>
                     <p class="text-gray-400">Dar es Salaam, Tanzania</p>
                 </div>
-                <div>
-                    <i class="fas fa-clock text-2xl text-rose-600 mb-4"></i>
-                    <h4 class="font-bold">Hours</h4>
-                    <p class="text-gray-400">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center mb-4 border border-zinc-800">
+                        <i class="fab fa-whatsapp text-2xl text-rose-600"></i>
+                    </div>
+                    <h4 class="font-black text-xl mb-2">WhatsApp</h4>
+                    <p class="text-gray-400">Available 24/7</p>
                 </div>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="https://wa.me/255782687045" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-xl font-bold flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://wa.me/255782687045" target="_blank" class="bg-[#25D366] hover:scale-105 transition-transform px-10 py-4 rounded-xl font-black flex items-center gap-3">
+                    <i class="fab fa-whatsapp text-xl"></i> START CHAT
                 </a>
-                <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-8 py-3 rounded-xl font-bold">
-                    Direct Call
+                <a href="tel:+255782687045" class="bg-rose-600 hover:scale-105 transition-transform px-10 py-4 rounded-xl font-black flex items-center gap-3">
+                    <i class="fas fa-phone-alt"></i> CALL NOW
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-gray-800 text-center text-gray-500 text-sm">
-        <p>&copy; 2026 Ryzen Graphics. All Rights Reserved.</p>
+    <footer class="py-16 border-t border-zinc-900 text-center">
+        <div class="text-3xl font-black text-rose-600 mb-6 italic">RYZEN GRAPHICS</div>
+        <div class="flex justify-center gap-8 mb-8 text-gray-400">
+            <a href="#" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+            <a href="#" class="hover:text-white transition"><i class="fab fa-youtube text-xl"></i></a>
+            <a href="#" class="hover:text-white transition"><i class="fab fa-tiktok text-xl"></i></a>
+        </div>
+        <p class="text-gray-600 text-sm tracking-widest">&copy; 2026 RYZEN GRAPHICS. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        const cars = [
-            {
-                name: "Porsche 911 Turbo S",
-                price: "$216,100",
-                img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
-                hp: "640 HP",
-                topSpeed: "205 MPH"
-            },
-            {
-                name: "Mercedes AMG GT",
-                price: "$118,600",
-                img: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80",
-                hp: "523 HP",
-                topSpeed: "194 MPH"
-            },
-            {
-                name: "Audi R8 Performance",
-                price: "$158,600",
-                img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80",
-                hp: "602 HP",
-                topSpeed: "201 MPH"
-            },
-            {
-                name: "BMW M4 Competition",
-                price: "$78,600",
-                img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
-                hp: "503 HP",
-                topSpeed: "180 MPH"
-            },
-            {
-                name: "Lamborghini Huracán",
-                price: "$206,000",
-                img: "https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&w=800&q=80",
-                hp: "631 HP",
-                topSpeed: "202 MPH"
-            },
-            {
-                name: "Ferrari F8 Tributo",
-                price: "$276,000",
-                img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80",
-                hp: "710 HP",
-                topSpeed: "211 MPH"
-            }
+        const carData = [
+            // LEGENDS
+            { name: "Ford Mustang", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mazda MX-5 Miata", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+            { name: "Porsche 911", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" },
+            { name: "Chevrolet Corvette", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Chevrolet Camaro", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1552519507-873291249870?auto=format&fit=crop&w=800&q=80" },
+            { name: "Nissan Z-Car", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1619682817481-e99489121f82?auto=format&fit=crop&w=800&q=80" },
+            { name: "Toyota Supra", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1621932953986-15fcfec8327c?auto=format&fit=crop&w=800&q=80" },
+            { name: "BMW M3", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" },
+            { name: "Volkswagen Golf GTI", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1565463744607-88981242d5ba?auto=format&fit=crop&w=800&q=80" },
+            { name: "Audi TT", category: "Legend", price: "Popular", img: "https://images.unsplash.com/photo-1518306203527-2c130325492d?auto=format&fit=crop&w=800&q=80" },
+
+            // MODERN PERFORMANCE
+            { name: "Porsche 911 GT3 RS", category: "Modern", price: "Trending", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" },
+            { name: "Corvette ZR1", category: "Modern", price: "1,064 HP", img: "https://images.unsplash.com/photo-1598517228020-f5a43586071a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari 12Cilindri", category: "Modern", price: "New 2026", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lotus Emira", category: "Modern", price: "Trending", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "BMW M2 CS", category: "Modern", price: "Popular", img: "https://images.unsplash.com/photo-1618342410881-2a9f939e801b?auto=format&fit=crop&w=800&q=80" },
+            { name: "Toyota GR86", category: "Modern", price: "Popular", img: "https://images.unsplash.com/photo-1632243193044-740a0a848560?auto=format&fit=crop&w=800&q=80" },
+            { name: "Honda Civic Type R", category: "Modern", price: "Hot Hatch", img: "https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mustang Dark Horse", category: "Modern", price: "New 2025", img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80" },
+            { name: "Nissan GT-R", category: "Modern", price: "Godzilla", img: "https://images.unsplash.com/photo-1552519507-873291249870?auto=format&fit=crop&w=800&q=80" },
+            { name: "Aston Martin Vantage", category: "Modern", price: "Trending", img: "https://images.unsplash.com/photo-1600706432502-77a0e2e327fc?auto=format&fit=crop&w=800&q=80" },
+
+            // EUROPEAN MASTERPIECES
+            { name: "Jaguar E-Type", category: "European", price: "Classic", img: "https://images.unsplash.com/photo-1589133496033-6689d08e45b4?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lamborghini Miura", category: "European", price: "Rare", img: "https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari 250 GTO", category: "European", price: "Priceless", img: "https://images.unsplash.com/photo-1625235471449-7c980966f399?auto=format&fit=crop&w=800&q=80" },
+            { name: "McLaren F1", category: "European", price: "Iconic", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Bugatti Veyron", category: "European", price: "Supercar", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mercedes 300SL", category: "European", price: "Gullwing", img: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80" },
+            { name: "Audi Quattro", category: "European", price: "Rally", img: "https://images.unsplash.com/photo-1621348821513-e5d483863795?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lotus Elise", category: "European", price: "Lightweight", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari F40", category: "European", price: "Classic", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lamborghini Countach", category: "European", price: "Poster Car", img: "https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&w=800&q=80" },
+            { name: "Porsche 959", category: "European", price: "Legend", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari Enzo", category: "European", price: "Limited", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80" },
+            { name: "Aston Martin DB5", category: "European", price: "Bond Car", img: "https://images.unsplash.com/photo-1600706432502-77a0e2e327fc?auto=format&fit=crop&w=800&q=80" },
+            { name: "Alfa Romeo Giulia", category: "European", price: "Sport Sedan", img: "https://images.unsplash.com/photo-1603819314851-0f212638f227?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lancia Stratos", category: "European", price: "Rally", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80" },
+            { name: "Alpine A110", category: "European", price: "Sport", img: "https://images.unsplash.com/photo-1632243193044-740a0a848560?auto=format&fit=crop&w=800&q=80" },
+            { name: "BMW M1", category: "European", price: "Rare", img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80" },
+            { name: "Porsche Carrera GT", category: "European", price: "V10", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=800&q=80" },
+            { name: "Pagani Zonda", category: "European", price: "Art", img: "https://images.unsplash.com/photo-1593453913009-4458f4a7c88a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Koenigsegg Jesko", category: "European", price: "Speed", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari 458 Italia", category: "European", price: "V8", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lamborghini Huracán", category: "European", price: "Available", img: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mercedes-AMG GT", category: "European", price: "V8 Biturbo", img: "https://images.unsplash.com/photo-1617814076367-b759c7d6274a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Aston Martin DBS", category: "European", price: "V12", img: "https://images.unsplash.com/photo-1600706432502-77a0e2e327fc?auto=format&fit=crop&w=800&q=80" },
+            { name: "Maserati GranTurismo", category: "European", price: "GT", img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Bentley Continental", category: "European", price: "Luxury", img: "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Fiat 124 Spider", category: "European", price: "Convertible", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+            { name: "Austin-Healey 3000", category: "European", price: "Classic", img: "https://images.unsplash.com/photo-1589133496033-6689d08e45b4?auto=format&fit=crop&w=800&q=80" },
+            { name: "Triumph TR6", category: "European", price: "Classic", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+            { name: "MG MGB", category: "European", price: "Classic", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+
+            // JAPANESE GOLDEN ERA
+            { name: "Acura/Honda NSX", category: "Japanese", price: "Legend", img: "https://images.unsplash.com/photo-1619682817481-e99489121f82?auto=format&fit=crop&w=800&q=80" },
+            { name: "Nissan Skyline GT-R R34", category: "Japanese", price: "Godzilla", img: "https://images.unsplash.com/photo-1598517228020-f5a43586071a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mazda RX-7", category: "Japanese", price: "Rotary", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mitsubishi Lancer Evo", category: "Japanese", price: "JDM", img: "https://images.unsplash.com/photo-1621932953986-15fcfec8327c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Subaru Impreza STI", category: "Japanese", price: "Rally", img: "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Toyota 2000GT", category: "Japanese", price: "Rare", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+            { name: "Honda S2000", category: "Japanese", price: "High Rev", img: "https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lexus LFA", category: "Japanese", price: "V10", img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Datsun 510", category: "Japanese", price: "Classic", img: "https://images.unsplash.com/photo-1563214562-b9487c63ec94?auto=format&fit=crop&w=800&q=80" },
+            { name: "Nissan Silvia", category: "Japanese", price: "Drift", img: "https://images.unsplash.com/photo-1598517228020-f5a43586071a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Honda Integra Type R", category: "Japanese", price: "Legend", img: "https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mazda RX-8", category: "Japanese", price: "Rotary", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Toyota MR2", category: "Japanese", price: "Mid Engine", img: "https://images.unsplash.com/photo-1632243193044-740a0a848560?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mitsubishi 3000GT", category: "Japanese", price: "VR-4", img: "https://images.unsplash.com/photo-1621932953986-15fcfec8327c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Lexus LC 500", category: "Japanese", price: "V8", img: "https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=800&q=80" },
+            { name: "Honda Prelude 2026", category: "Japanese", price: "Hybrid", img: "https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=800&q=80" },
+
+            // AMERICAN MUSCLE
+            { name: "Shelby Cobra 427", category: "American", price: "Legend", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ford GT40", category: "American", price: "Le Mans", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Dodge Viper", category: "American", price: "V10", img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80" },
+            { name: "Pontiac GTO", category: "American", price: "Classic", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Plymouth Barracuda", category: "American", price: "Muscle", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Dodge Challenger", category: "American", price: "Hellcat", img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80" },
+            { name: "Shelby GT500", category: "American", price: "Mustang", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Cadillac CT5-V", category: "American", price: "Blackwing", img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80" },
+            { name: "Saleen S7", category: "American", price: "Supercar", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" },
+            { name: "DeLorean DMC-12", category: "American", price: "Iconic", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80" },
+            { name: "Buick GNX", category: "American", price: "Rare", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Mustang Mach 1", category: "American", price: "Muscle", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Chevrolet Chevelle SS", category: "American", price: "Classic", img: "https://images.unsplash.com/photo-1584345604482-843472c8157a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Dodge Charger", category: "American", price: "Classic", img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80" },
+
+            // HYPERCARS
+            { name: "Rimac Nevera", category: "Hyper", price: "EV King", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Porsche 918 Spyder", category: "Hyper", price: "Hybrid", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ferrari LaFerrari", category: "Hyper", price: "Hybrid", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80" },
+            { name: "McLaren P1", category: "Hyper", price: "Iconic", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Bugatti Chiron", category: "Hyper", price: "W16", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ford GT 2017", category: "Hyper", price: "American", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Pagani Huayra", category: "Hyper", price: "Art", img: "https://images.unsplash.com/photo-1593453913009-4458f4a7c88a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Gordon Murray T.50", category: "Hyper", price: "V12", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Zenvo TSR-S", category: "Hyper", price: "Active Aero", img: "https://images.unsplash.com/photo-1593453913009-4458f4a7c88a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Hennessey Venom F5", category: "Hyper", price: "300+ MPH", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" },
+            { name: "Apollo IE", category: "Hyper", price: "Alien", img: "https://images.unsplash.com/photo-1593453913009-4458f4a7c88a?auto=format&fit=crop&w=800&q=80" },
+            { name: "Noble M600", category: "Hyper", price: "Raw", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "TVR Sagaris", category: "Hyper", price: "Wild", img: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=800&q=80" },
+            { name: "Morgan Plus Six", category: "Hyper", price: "Unique", img: "https://images.unsplash.com/photo-1589133496033-6689d08e45b4?auto=format&fit=crop&w=800&q=80" },
+            { name: "Ariel Atom", category: "Hyper", price: "Track", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "KTM X-Bow", category: "Hyper", price: "Track", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "Caterham Seven", category: "Hyper", price: "Pure", img: "https://images.unsplash.com/photo-1589133496033-6689d08e45b4?auto=format&fit=crop&w=800&q=80" },
+            { name: "Donkervoort F22", category: "Hyper", price: "Tech", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "BAC Mono", category: "Hyper", price: "Single Seat", img: "https://images.unsplash.com/photo-1627230490710-858882ca6855?auto=format&fit=crop&w=800&q=80" },
+            { name: "Pininfarina Battista", category: "Hyper", price: "EV Art", img: "https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=800&q=80" }
         ];
 
         const carGrid = document.getElementById('carGrid');
+        const carSearch = document.getElementById('carSearch');
+        const filterBtns = document.querySelectorAll('.filter-btn');
 
-        cars.forEach(car => {
-            const card = document.createElement('div');
-            card.className = "car-card glass rounded-3xl overflow-hidden group";
-            card.innerHTML = `
-                <div class="h-64 overflow-hidden relative">
-                    <img src="${car.img}" alt="${car.name}" class="car-image w-full h-full object-cover">
-                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-sm">
-                        Available
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-1">${car.name}</h3>
-                    <p class="text-rose-600 font-bold text-lg mb-4">${car.price}</p>
-                    <div class="flex justify-between border-t border-gray-800 pt-4 text-sm text-gray-400">
-                        <div class="text-center">
-                            <p class="text-white font-bold">${car.hp}</p>
-                            <p>Power</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-white font-bold">${car.topSpeed}</p>
-                            <p>Top Speed</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-white font-bold">Auto</p>
-                            <p>Gearbox</p>
+        function renderCars(filter = 'all', searchTerm = '') {
+            carGrid.innerHTML = '';
+            
+            const filteredCars = carData.filter(car => {
+                const matchesFilter = filter === 'all' || car.category === filter;
+                const matchesSearch = car.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                     car.category.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            filteredCars.forEach(car => {
+                const card = document.createElement('div');
+                card.className = "car-card glass rounded-2xl overflow-hidden group border border-white/5";
+                card.innerHTML = `
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="${car.img}" alt="${car.name}" class="car-image w-full h-full object-cover grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] font-black tracking-widest uppercase bg-rose-600 px-2 py-1 rounded-sm">${car.category}</span>
                         </div>
                     </div>
-                    <button class="w-full mt-6 bg-white text-black font-bold py-3 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition-colors">
-                        View Details
-                    </button>
-                </div>
-            `;
-            carGrid.appendChild(card);
+                    <div class="p-5">
+                        <h3 class="text-lg font-black tracking-tight mb-1 group-hover:text-rose-600 transition">${car.name}</h3>
+                        <p class="text-gray-400 text-sm font-bold mb-4 italic">${car.price}</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-2">
+                                <span class="w-2 h-2 rounded-full bg-rose-600"></span>
+                                <span class="w-2 h-2 rounded-full bg-zinc-700"></span>
+                                <span class="w-2 h-2 rounded-full bg-zinc-800"></span>
+                            </div>
+                            <button class="text-xs font-black uppercase tracking-widest border-b border-rose-600 pb-1">Enquire</button>
+                        </div>
+                    </div>
+                `;
+                carGrid.appendChild(card);
+            });
+            
+            if (filteredCars.length === 0) {
+                carGrid.innerHTML = '<div class="col-span-full py-20 text-center text-gray-500 font-bold">No icons found matching your search.</div>';
+            }
+        }
+
+        // Search Input Event
+        carSearch.addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            renderCars(activeFilter, e.target.value);
         });
+
+        // Filter Button Events
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active', 'bg-rose-600'));
+                filterBtns.forEach(b => b.classList.add('bg-zinc-800'));
+                
+                btn.classList.add('active', 'bg-rose-600');
+                btn.classList.remove('bg-zinc-800');
+                
+                renderCars(btn.dataset.filter, carSearch.value);
+            });
+        });
+
+        // Initial Load
+        window.onload = () => renderCars();
     </script>
 </body>
 </html>
