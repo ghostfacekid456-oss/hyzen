@@ -3,198 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Drive | Car Showcase</title>
+    <title>Ryzen Graphics | Luxury Car Showroom</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Lexend:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
             scroll-behavior: smooth;
         }
-        
-        .heading-font {
-            font-family: 'Lexend', sans-serif;
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .car-card:hover .car-overlay {
-            opacity: 1;
+        .car-card:hover .car-image {
+            transform: scale(1.05);
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .car-image {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+        }
+
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(0deg, #0a0a0a 0%, transparent 100%);
+        }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #e11d48;
+            transition: width .3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-car-side text-blue-600 text-2xl"></i>
-                    <span class="text-xl font-bold heading-font tracking-tight">ELITE<span class="text-blue-600">DRIVE</span></span>
-                </div>
-                <div class="hidden md:flex space-x-8 font-medium text-sm text-slate-600">
-                    <a href="#home" class="hover:text-blue-600 transition">Home</a>
-                    <a href="#collection" class="hover:text-blue-600 transition">Collection</a>
-                    <a href="#about" class="hover:text-blue-600 transition">About</a>
-                    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">Contact</a>
-                </div>
-            </div>
+    <nav class="fixed w-full z-50 glass px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-extrabold tracking-tighter text-rose-600">RYZEN GRAPHICS</div>
+        <div class="hidden md:flex space-x-8 font-medium">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#showroom" class="nav-link">Showroom</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </div>
+        <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-5 py-2 rounded-full text-sm font-bold transition">
+            Call Now
+        </a>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative py-20 lg:py-32 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-                <div class="mb-12 lg:mb-0">
-                    <h1 class="text-5xl lg:text-7xl font-bold heading-font leading-tight mb-6">
-                        Discover the <span class="gradient-text">Future</span> of Performance.
-                    </h1>
-                    <p class="text-lg text-slate-600 mb-8 max-w-lg">
-                        From sleek electric sedans to high-octane supercars, explore our curated collection of automotive excellence.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#collection" class="bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition shadow-lg shadow-slate-200">Explore Cars</a>
-                        <button class="border border-slate-300 px-8 py-4 rounded-xl font-semibold hover:bg-slate-100 transition">Learn More</button>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="bg-blue-600/10 absolute -inset-4 rounded-3xl -rotate-2"></div>
-                    <!-- Placeholder SVG for Hero Image -->
-                    <div class="relative bg-white p-2 rounded-2xl shadow-2xl">
-                        <svg viewBox="0 0 800 500" class="w-full h-auto rounded-xl" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="800" height="500" fill="#f1f5f9"/>
-                            <path d="M150 350 Q400 300 650 350 L630 250 Q400 200 170 250 Z" fill="#334155"/>
-                            <circle cx="230" cy="350" r="40" fill="#1e293b"/>
-                            <circle cx="570" cy="350" r="40" fill="#1e293b"/>
-                            <text x="400" y="450" font-family="Arial" font-size="24" text-anchor="middle" fill="#64748b">Modern Engineering</text>
-                        </svg>
-                    </div>
-                </div>
+    <!-- Hero Section with Video -->
+    <section id="home" class="video-container">
+        <!-- Using a placeholder video link - replace with your actual MP4 link -->
+        <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-fast-driving-on-a-highway-at-night-1718-large.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/50 gradient-overlay flex flex-col justify-center items-center text-center px-4">
+            <h1 class="text-5xl md:text-7xl font-black mb-4 uppercase italic">Pure Performance</h1>
+            <p class="text-xl text-gray-300 max-w-2xl">Experience the pinnacle of automotive engineering at Ryzen Graphics Showroom.</p>
+            <a href="#showroom" class="mt-8 border-2 border-white hover:bg-white hover:text-black px-8 py-3 font-bold transition-all duration-300">
+                EXPLORE COLLECTION
+            </a>
+        </div>
+    </section>
+
+    <!-- Showroom Grid -->
+    <section id="showroom" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl font-bold mb-2">Inventory</h2>
+                <p class="text-gray-400">Our latest arrivals and exclusive models.</p>
+            </div>
+            <div class="flex space-x-2">
+                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-left"></i></button>
+                <button class="p-2 border border-gray-700 rounded-full hover:bg-gray-800"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="carGrid">
+            <!-- Car cards will be injected here via JS -->
+        </div>
+    </section>
+
+    <!-- Featured Video Section -->
+    <section class="py-20 bg-zinc-900 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="rounded-3xl overflow-hidden shadow-2xl">
+                <video controls class="w-full">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-red-sports-car-in-a-parking-lot-4458-large.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div>
+                <span class="text-rose-600 font-bold tracking-widest uppercase">Cinematic Review</span>
+                <h2 class="text-4xl font-bold mt-2 mb-6">Visual Excellence in Motion</h2>
+                <p class="text-gray-400 leading-relaxed mb-6">
+                    Every curve, every sound, and every detail captured to give you a true feel of our premium fleet. Watch our 4K cinematic showcases before you visit.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> High Performance Specs</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Interior Walkthroughs</li>
+                    <li class="flex items-center gap-2"><i class="fas fa-check-circle text-rose-600"></i> Exhaust Sound Testing</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- Collection Section -->
-    <section id="collection" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold heading-font mb-4">Our Premium Fleet</h2>
-                <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 text-center">
+        <div class="glass max-w-4xl mx-auto rounded-3xl p-12">
+            <h2 class="text-3xl font-bold mb-4">Visit Ryzen Graphics</h2>
+            <p class="text-gray-400 mb-8">Ready to take the wheel? Schedule a private viewing today.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <i class="fas fa-phone text-2xl text-rose-600 mb-4"></i>
+                    <h4 class="font-bold">Phone</h4>
+                    <p class="text-gray-400">+255 782 687 045</p>
+                </div>
+                <div>
+                    <i class="fas fa-location-dot text-2xl text-rose-600 mb-4"></i>
+                    <h4 class="font-bold">Location</h4>
+                    <p class="text-gray-400">Dar es Salaam, Tanzania</p>
+                </div>
+                <div>
+                    <i class="fas fa-clock text-2xl text-rose-600 mb-4"></i>
+                    <h4 class="font-bold">Hours</h4>
+                    <p class="text-gray-400">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Car Card 1 -->
-                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
-                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
-                        <i class="fas fa-bolt text-5xl text-blue-500 opacity-50"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold heading-font">Electric Sedans</h3>
-                        <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">EV</span>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                        Sustainable luxury with instant torque and cutting-edge autonomous features.
-                    </p>
-                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> 400+ Mile Range</li>
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> 0-60 in 2.4s</li>
-                    </ul>
-                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
-                </div>
-
-                <!-- Car Card 2 -->
-                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
-                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
-                        <i class="fas fa-mountain text-5xl text-orange-500 opacity-50"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold heading-font">Off-Road SUVs</h3>
-                        <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded">4X4</span>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                        Unmatched durability for the adventurer who refuses to compromise on comfort.
-                    </p>
-                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Adaptive Suspension</li>
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> All-Terrain Modes</li>
-                    </ul>
-                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
-                </div>
-
-                <!-- Car Card 3 -->
-                <div class="group bg-slate-50 rounded-3xl p-6 border border-slate-100 hover:shadow-xl transition-all duration-300">
-                    <div class="mb-6 overflow-hidden rounded-2xl bg-slate-200 aspect-video flex items-center justify-center">
-                        <i class="fas fa-tachometer-alt text-5xl text-red-500 opacity-50"></i>
-                    </div>
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold heading-font">Supercars</h3>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">PRO</span>
-                    </div>
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">
-                        Aerodynamic masterpieces designed to blur the line between road and track.
-                    </p>
-                    <ul class="space-y-2 mb-8 text-sm text-slate-500">
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> V12 Twin Turbo</li>
-                        <li><i class="fas fa-check text-blue-500 mr-2"></i> Carbon Fiber Body</li>
-                    </ul>
-                    <button class="w-full py-3 bg-white border border-slate-200 rounded-xl font-semibold group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition">View Details</button>
-                </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://wa.me/255782687045" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 px-8 py-3 rounded-xl font-bold flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </a>
+                <a href="tel:+255782687045" class="bg-rose-600 hover:bg-rose-700 px-8 py-3 rounded-xl font-bold">
+                    Direct Call
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center gap-2 mb-6">
-                        <i class="fas fa-car-side text-blue-400 text-2xl"></i>
-                        <span class="text-xl font-bold heading-font tracking-tight">ELITE<span class="text-blue-400">DRIVE</span></span>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Leading the world in automotive curation and digital experiences for car enthusiasts globally.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-6 heading-font uppercase text-xs tracking-widest text-slate-500">Quick Links</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li><a href="#" class="hover:text-white transition">Inventory</a></li>
-                        <li><a href="#" class="hover:text-white transition">Financing</a></li>
-                        <li><a href="#" class="hover:text-white transition">Test Drive</a></li>
-                        <li><a href="#" class="hover:text-white transition">Support</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-6 heading-font uppercase text-xs tracking-widest text-slate-500">Newsletter</h4>
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="Enter email" class="bg-slate-800 border-none rounded-lg px-4 py-2 text-sm w-full focus:ring-2 focus:ring-blue-500">
-                        <button class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Bottom Branding -->
-            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-slate-500 text-xs">
-                    &copy; 2024 Elite Drive Automotive. All rights reserved.
-                </p>
-                <div class="text-slate-300 font-bold tracking-widest text-sm heading-font uppercase">
-                    ryzen graphics
-                </div>
-            </div>
-        </div>
+    <footer class="py-12 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <p>&copy; 2024 Ryzen Graphics. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        const cars = [
+            {
+                name: "Porsche 911 Turbo S",
+                price: "$216,100",
+                img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+                hp: "640 HP",
+                topSpeed: "205 MPH"
+            },
+            {
+                name: "Mercedes AMG GT",
+                price: "$118,600",
+                img: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80",
+                hp: "523 HP",
+                topSpeed: "194 MPH"
+            },
+            {
+                name: "Audi R8 Performance",
+                price: "$158,600",
+                img: "https://images.unsplash.com/photo-1603584173870-7f3ca99a9424?auto=format&fit=crop&w=800&q=80",
+                hp: "602 HP",
+                topSpeed: "201 MPH"
+            },
+            {
+                name: "BMW M4 Competition",
+                price: "$78,600",
+                img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
+                hp: "503 HP",
+                topSpeed: "180 MPH"
+            },
+            {
+                name: "Lamborghini Huracán",
+                price: "$206,000",
+                img: "https://images.unsplash.com/photo-1544636331-e268592033c2?auto=format&fit=crop&w=800&q=80",
+                hp: "631 HP",
+                topSpeed: "202 MPH"
+            },
+            {
+                name: "Ferrari F8 Tributo",
+                price: "$276,000",
+                img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80",
+                hp: "710 HP",
+                topSpeed: "211 MPH"
+            }
+        ];
+
+        const carGrid = document.getElementById('carGrid');
+
+        cars.forEach(car => {
+            const card = document.createElement('div');
+            card.className = "car-card glass rounded-3xl overflow-hidden group";
+            card.innerHTML = `
+                <div class="h-64 overflow-hidden relative">
+                    <img src="${car.img}" alt="${car.name}" class="car-image w-full h-full object-cover">
+                    <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-sm">
+                        Available
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-1">${car.name}</h3>
+                    <p class="text-rose-600 font-bold text-lg mb-4">${car.price}</p>
+                    <div class="flex justify-between border-t border-gray-800 pt-4 text-sm text-gray-400">
+                        <div class="text-center">
+                            <p class="text-white font-bold">${car.hp}</p>
+                            <p>Power</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-white font-bold">${car.topSpeed}</p>
+                            <p>Top Speed</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-white font-bold">Auto</p>
+                            <p>Gearbox</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 bg-white text-black font-bold py-3 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                        View Details
+                    </button>
+                </div>
+            `;
+            carGrid.appendChild(card);
+        });
+    </script>
 </body>
 </html>
