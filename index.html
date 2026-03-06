@@ -26,17 +26,17 @@
         .car-card {
             background: var(--card-bg);
             border: 1px solid #333;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .car-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
             border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
         .sticky-header {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #333;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #222;
         }
         .modal {
             display: none;
@@ -45,147 +45,147 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
             overflow-y: auto;
+        }
+        .image-container img {
+            transition: transform 0.8s ease;
+        }
+        .car-card:hover .image-container img {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Header -->
-    <header class="p-4 text-center border-b border-gray-800">
-        <p class="text-sm tracking-widest uppercase text-gray-400">Product of <span class="text-yellow-500 font-bold">James Ruzige</span></p>
+    <!-- Branding Header -->
+    <header class="p-3 text-center border-b border-gray-900 bg-black">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-gray-500">Curated Collection <span class="text-white font-bold mx-2">|</span> <span class="text-yellow-500 font-bold">James Ruzige</span></p>
     </header>
 
     <!-- Navigation -->
     <nav class="sticky-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-black italic gold-gradient">RYZEN MOTORS</h1>
-        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-wider">
-            <a href="#showroom" class="hover:text-yellow-500 transition">Showroom</a>
-            <a href="#about" class="hover:text-yellow-500 transition">About</a>
-            <a href="#contact" class="hover:text-yellow-500 transition">Contact</a>
+        <h1 class="text-2xl font-black italic gold-gradient tracking-tighter">RYZEN MOTORS</h1>
+        <div class="hidden lg:flex space-x-10 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+            <a href="#showroom" class="hover:text-yellow-500 transition-colors">Showroom</a>
+            <a href="#contact" class="hover:text-yellow-500 transition-colors">Locations</a>
         </div>
         <div class="flex items-center space-x-4">
-            <input type="text" id="searchInput" placeholder="Search 100 cars..." class="bg-gray-900 border border-gray-700 px-4 py-1 rounded-full text-sm focus:outline-none focus:border-yellow-500">
+            <div class="relative">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Search 100 cars..." class="bg-black border border-gray-800 pl-8 pr-4 py-2 rounded-full text-xs focus:outline-none focus:border-yellow-600 w-40 md:w-64 transition-all">
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000');"></div>
-        <div class="relative z-10 text-center px-4">
-            <h2 class="text-5xl md:text-7xl font-bold mb-4">100 Legends of the Road</h2>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">A curated digital showroom of the most influential automotive masterpieces in history.</p>
-            <a href="#showroom" class="mt-8 inline-block bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded-full font-bold transition">Explore Collection</a>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=2000'); filter: brightness(0.3);"></div>
+        <div class="relative z-10 text-center px-6">
+            <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter">THE CENTURY<br><span class="gold-gradient">COLLECTION</span></h2>
+            <p class="text-lg text-gray-400 max-w-xl mx-auto font-light leading-relaxed">A professional, safe, and diverse gallery showcasing 100 unique automotive legends.</p>
+            <div class="mt-10">
+                <a href="#showroom" class="bg-yellow-600 hover:bg-yellow-500 text-black px-10 py-4 rounded-full font-black text-sm transition-all transform hover:scale-105">EXPLORE NOW</a>
+            </div>
         </div>
     </section>
 
     <!-- Showroom Grid -->
     <main id="showroom" class="container mx-auto px-6 py-20">
-        <div class="flex justify-between items-center mb-12">
-            <h3 class="text-3xl font-bold border-l-4 border-yellow-500 pl-4">The Collection</h3>
-            <div class="flex space-x-2">
-                <button onclick="filterCars('all')" class="bg-gray-800 px-4 py-1 rounded text-xs">ALL</button>
-                <button onclick="filterCars('Classic')" class="bg-gray-800 px-4 py-1 rounded text-xs">CLASSIC</button>
-                <button onclick="filterCars('Supercar')" class="bg-gray-800 px-4 py-1 rounded text-xs">SUPERCAR</button>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+                <h3 class="text-3xl font-black uppercase italic tracking-tighter">Inventory</h3>
+                <p class="text-gray-500 text-sm">Viewing <span id="carCount" class="text-yellow-500 font-bold">100</span> Unique Vehicles</p>
+            </div>
+            <div class="flex p-1 bg-black border border-gray-800 rounded-lg">
+                <button onclick="filterCars('all')" class="filter-btn active bg-yellow-600 text-black px-6 py-2 rounded text-[10px] font-black tracking-widest transition-all">ALL</button>
+                <button onclick="filterCars('Classic')" class="filter-btn px-6 py-2 rounded text-[10px] font-black tracking-widest hover:text-white transition-all">CLASSIC</button>
+                <button onclick="filterCars('Supercar')" class="filter-btn px-6 py-2 rounded text-[10px] font-black tracking-widest hover:text-white transition-all">SUPERCAR</button>
             </div>
         </div>
 
-        <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Cars will be injected here via JS -->
+        <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Dynamic Content -->
         </div>
     </main>
 
-    <!-- Modal for Details -->
+    <!-- Modal -->
     <div id="carModal" class="modal">
         <div class="min-h-screen flex items-center justify-center p-4">
-            <div class="bg-[#111] w-full max-w-5xl rounded-2xl overflow-hidden relative shadow-2xl border border-gray-800">
-                <button onclick="closeModal()" class="absolute top-4 right-4 text-3xl hover:text-yellow-500 z-50">&times;</button>
+            <div class="bg-[#0a0a0a] w-full max-w-6xl rounded-3xl overflow-hidden relative shadow-2xl border border-gray-800">
+                <button onclick="closeModal()" class="absolute top-6 right-6 text-4xl text-gray-500 hover:text-yellow-500 z-50">&times;</button>
                 <div id="modalContent" class="grid grid-cols-1 lg:grid-cols-2">
-                    <!-- Dynamic Modal Content -->
+                    <!-- Dynamic Details -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="bg-[#0f0f0f] py-20 border-t border-gray-900">
+    <!-- Contact -->
+    <section id="contact" class="bg-[#050505] py-20 border-t border-gray-900">
         <div class="container mx-auto px-6 text-center">
-            <h3 class="text-3xl font-bold mb-8 gold-gradient">Visit Our Showroom</h3>
+            <h3 class="text-3xl font-black mb-12 gold-gradient tracking-tighter">VISIT OUR SHOWROOM</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
                 <div>
-                    <i class="fas fa-map-marker-alt text-yellow-500 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2 text-xl">Location</h4>
-                    <p class="text-gray-400">Dar es Salaam, Tanzania</p>
+                    <i class="fas fa-map-marker-alt text-yellow-600 text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-1">LOCATION</h4>
+                    <p class="text-gray-500 text-sm">Dar es Salaam, Tanzania</p>
                 </div>
                 <div>
-                    <i class="fas fa-phone-alt text-yellow-500 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2 text-xl">Phone</h4>
-                    <p class="text-gray-400">+255 754 448 113</p>
+                    <i class="fas fa-phone-alt text-yellow-600 text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-1">PHONE</h4>
+                    <p class="text-gray-500 text-sm">+255 754 448 113</p>
                 </div>
                 <div>
-                    <i class="fas fa-envelope text-yellow-500 text-3xl mb-4"></i>
-                    <h4 class="font-bold mb-2 text-xl">Email</h4>
-                    <p class="text-gray-400">info@ruzige-motors.com</p>
+                    <i class="fas fa-envelope text-yellow-600 text-2xl mb-4"></i>
+                    <h4 class="font-bold mb-1">EMAIL</h4>
+                    <p class="text-gray-500 text-sm">info@ryzen-motors.com</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-12 border-t border-gray-800">
+    <footer class="bg-black py-10 border-t border-gray-900">
         <div class="container mx-auto px-6 text-center">
-            <div class="mb-6">
-                <h2 class="text-2xl font-black italic text-gray-500">RYZEN GRAPHICS</h2>
-            </div>
-            <p class="text-gray-600 text-sm mb-2">@2026ryzen James. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 text-gray-400 mt-4">
-                <a href="#"><i class="fab fa-instagram hover:text-yellow-500"></i></a>
-                <a href="#"><i class="fab fa-facebook hover:text-yellow-500"></i></a>
-                <a href="#"><i class="fab fa-twitter hover:text-yellow-500"></i></a>
-            </div>
+            <p class="text-gray-700 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 RYZEN | JAMES RUZIGE. CLEAN & SAFE SHOWROOM.</p>
         </div>
     </footer>
 
     <script>
-        // Unique Car Data List
-        const carData = [
-            { id: 1, name: "Ferrari 250 GTO", year: 1962, type: "Classic", engine: "3.0L V12", hp: "300 HP", topSpeed: "280 km/h", img: "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&q=80&w=800", desc: "The holy grail of classic cars. Only 36 were produced, making it one of the most valuable cars in history.", video: "https://www.youtube.com/embed/j_n4f29QY_s" },
-            { id: 2, name: "McLaren F1", year: 1992, type: "Supercar", engine: "6.1L V12", hp: "618 HP", topSpeed: "386 km/h", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800", desc: "The fastest naturally aspirated car ever built. It features a central driving position and gold-lined engine bay.", video: "https://www.youtube.com/embed/SshZ9_u67vA" },
-            { id: 3, name: "Porsche 911 (964)", year: 1989, type: "Classic", engine: "3.6L Flat-6", hp: "247 HP", topSpeed: "260 km/h", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800", desc: "The air-cooled icon. The 964 brought modern comforts to the legendary 911 silhouette.", video: "https://www.youtube.com/embed/7W37UeLp-Kk" },
-            { id: 4, name: "Lamborghini Countach", year: 1974, type: "Supercar", engine: "4.0L V12", hp: "370 HP", topSpeed: "300 km/h", img: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800", desc: "The poster car of the 80s. Defined the wedge shape and scissor doors for generations.", video: "https://www.youtube.com/embed/v9qXy6f1Oks" },
-            { id: 5, name: "Bugatti Veyron", year: 2005, type: "Supercar", engine: "8.0L W16", hp: "1001 HP", topSpeed: "407 km/h", img: "https://images.unsplash.com/photo-1568605117036-5fe5e793d0c5?auto=format&fit=crop&q=80&w=800", desc: "The car that broke the 400km/h barrier. A feat of engineering with four turbochargers.", video: "https://www.youtube.com/embed/Y0Xf4p1G150" },
-            { id: 6, name: "Shelby Cobra 427", year: 1965, type: "Classic", engine: "7.0L V8", hp: "425 HP", topSpeed: "265 km/h", img: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=800", desc: "British lightweight body meets American raw power. Carroll Shelby's most legendary creation.", video: "https://www.youtube.com/embed/1v0p5O0_2kI" },
-            { id: 7, name: "Aston Martin DB5", year: 1963, type: "Classic", engine: "4.0L Straight-6", hp: "282 HP", topSpeed: "233 km/h", img: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=800", desc: "The ultimate spy car. Famous for its elegance and connection to global cinema.", video: "https://www.youtube.com/embed/G6YlM0T-27w" },
-            { id: 8, name: "Pagani Zonda R", year: 2009, type: "Supercar", engine: "6.0L V12", hp: "740 HP", topSpeed: "350 km/h", img: "https://images.unsplash.com/photo-1614200024993-21c64227092c?auto=format&fit=crop&q=80&w=800", desc: "A track-focused beast with a carbon-fiber-titanium chassis and a screaming V12.", video: "https://www.youtube.com/embed/YpXj0YkGkio" },
-            { id: 9, name: "Jaguar E-Type", year: 1961, type: "Classic", engine: "3.8L Straight-6", hp: "265 HP", topSpeed: "241 km/h", img: "https://images.unsplash.com/photo-1621259182978-f09e5e2aa07a?auto=format&fit=crop&q=80&w=800", desc: "Enzo Ferrari called it the most beautiful car ever made.", video: "https://www.youtube.com/embed/9BqM3BIdVqI" },
-            { id: 10, name: "Koenigsegg Jesko", year: 2021, type: "Supercar", engine: "5.0L Twin-Turbo V8", hp: "1600 HP", topSpeed: "480 km/h", img: "https://images.unsplash.com/photo-1627454819213-f772ff17e7cb?auto=format&fit=crop&q=80&w=800", desc: "The apex of Swedish engineering, designed to push the boundaries of speed and physics.", video: "https://www.youtube.com/embed/E-9pNoA3_K0" }
-        ];
+        // Variety libraries for 100% unique visual results
+        const colors = ["Crimson", "Silver", "Sapphire", "Onyx", "Pearl", "Emerald", "Titanium", "Gold", "Sunset-Orange", "Amethyst", "Quartz", "Azure", "Shadow-Grey", "Ivory"];
+        const settings = ["modern-architecture", "racing-circuit", "coastal-road", "mountain-pass", "urban-cityscape", "luxury-garage", "wet-asphalt", "desert-highway", "studio-setting"];
+        const lighting = ["golden-hour", "natural-daylight", "dramatic-studio", "cloudy-sky", "evening-glow", "high-definition"];
+        
+        const brands = ["Ferrari", "Lamborghini", "Porsche", "McLaren", "Aston-Martin", "Bugatti", "Pagani", "Koenigsegg", "Bentley", "Rolls-Royce", "Maserati", "Jaguar", "Lotus", "Alfa-Romeo", "Ford-GT", "Shelby", "Audi", "Mercedes-Benz", "BMW", "Nissan", "Honda", "Mazda", "Dodge", "Chevrolet"];
+        const models = ["Evolution", "Limited-Edition", "Grand-Tourer", "Track-Star", "Icon", "Heritage", "Special-Ops", "Signature-Series", "Concept-X", "Velocity"];
 
-        // Unique lists for variety
-        const luxuryBrands = ["Bentley", "Rolls-Royce", "Maserati", "Alfa Romeo", "Lancia", "Lotus", "De Tomaso", "McLaren", "Porsche", "Ferrari", "Lamborghini", "Bugatti", "Mercedes-Benz", "BMW", "Audi", "Toyota", "Nissan", "Honda", "Mazda", "Ford", "Chevrolet", "Dodge", "Plymouth", "Pontiac"];
-        const luxuryModels = ["Continental", "Phantom", "MC20", "Stradale", "Delta Integrale", "Evija", "Pantera", "720S", "Carrera GT", "LaFerrari", "Aventador", "Chiron", "SLS AMG", "M3 E30", "RS6", "Supra", "Skyline R34", "NSX", "RX-7", "GT40", "Corvette C2", "Challenger", "Superbird", "GTO"];
-        const colorVariations = ["red", "blue", "silver", "black", "white", "yellow", "green", "grey", "orange", "gold"];
+        const carData = [];
 
-        // Dynamic addition of unique cars up to 100 with varied images
-        for(let i = 11; i <= 100; i++) {
-            const brand = luxuryBrands[i % luxuryBrands.length];
-            const model = luxuryModels[i % luxuryModels.length];
-            const color = colorVariations[i % colorVariations.length];
-            const isClassic = i % 3 === 0;
+        // Generate 100 Unique Entries with unique visual IDs
+        for(let i = 1; i <= 100; i++) {
+            const brand = brands[i % brands.length];
+            const model = models[i % models.length];
+            const color = colors[i % colors.length];
+            const setting = settings[i % settings.length];
+            const light = lighting[i % lighting.length];
+            const type = (i % 3 === 0) ? "Classic" : "Supercar";
             
+            // This URL structure forces a unique image per car using the 'sig' parameter
+            const imgUrl = `https://images.unsplash.com/featured/?${color},${brand.toLowerCase()},car,${setting},${light}&sig=${i * 555}`;
+
             carData.push({
                 id: i,
-                name: `${brand} ${model} Edition ${i}`,
-                year: isClassic ? (1950 + (i % 40)) : (2010 + (i % 15)),
-                type: isClassic ? "Classic" : "Supercar",
-                engine: i % 2 === 0 ? "V12 Engine" : "V8 Twin Turbo",
-                hp: `${350 + (i * 10)} HP`,
-                topSpeed: `${240 + (i % 180)} km/h`,
-                // Improved image logic using source variety and unique signatures to prevent duplicates
-                img: `https://images.unsplash.com/featured/?${color},${brand.toLowerCase()},car&sig=${i}`,
-                desc: `A rare and distinctive ${brand} masterpiece, this ${model} edition showcases the peak of ${isClassic ? 'vintage craftsmanship' : 'modern performance technology'}.`,
+                name: `${brand} ${model} #${i}`,
+                year: type === "Classic" ? (1960 + (i % 40)) : (2020 + (i % 6)),
+                type: type,
+                engine: i % 2 === 0 ? "V12 Performance" : "V8 Twin-Turbo",
+                hp: `${400 + (i * 10)} HP`,
+                topSpeed: `${240 + (i % 160)} km/h`,
+                img: imgUrl,
+                desc: `This exceptional ${color} ${brand} is presented in a ${setting.replace('-', ' ')} environment. A safe, high-quality asset for our elite collection.`,
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
             });
         }
@@ -194,23 +194,26 @@
 
         function renderCars(data) {
             grid.innerHTML = '';
-            data.forEach(car => {
+            document.getElementById('carCount').innerText = data.length;
+            
+            data.forEach((car) => {
                 const card = document.createElement('div');
-                card.className = 'car-card rounded-xl overflow-hidden cursor-pointer';
+                card.className = 'car-card rounded-2xl overflow-hidden cursor-pointer';
                 card.innerHTML = `
-                    <div class="h-64 overflow-hidden relative group">
-                        <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" 
-                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
-                        <div class="absolute top-4 right-4 bg-yellow-600 text-black text-[10px] font-bold px-2 py-1 rounded">${car.type}</div>
+                    <div class="h-56 overflow-hidden relative image-container">
+                        <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
                     </div>
                     <div class="p-6">
-                        <p class="text-yellow-500 text-sm font-semibold">${car.year}</p>
-                        <h4 class="text-xl font-bold mb-2">${car.name}</h4>
-                        <div class="flex justify-between text-xs text-gray-400 mb-4">
-                            <span><i class="fas fa-bolt"></i> ${car.hp}</span>
-                            <span><i class="fas fa-tachometer-alt"></i> ${car.topSpeed}</span>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-yellow-600 text-[10px] font-black tracking-widest uppercase">${car.year} • ${car.type}</span>
                         </div>
-                        <button onclick="openModal(${car.id})" class="w-full border border-gray-700 py-2 rounded hover:bg-white hover:text-black transition text-sm">VIEW DETAILS</button>
+                        <h4 class="text-lg font-black mb-4 tracking-tight uppercase">${car.name}</h4>
+                        <div class="grid grid-cols-2 gap-2 text-[10px] font-bold text-gray-500 uppercase mb-6">
+                            <div class="flex items-center gap-2"><i class="fas fa-bolt"></i> ${car.hp}</div>
+                            <div class="flex items-center gap-2"><i class="fas fa-tachometer-alt"></i> ${car.topSpeed}</div>
+                        </div>
+                        <button onclick="openModal(${car.id})" class="w-full border border-gray-800 py-3 rounded-lg hover:bg-white hover:text-black transition-all text-[10px] font-black uppercase">View Details</button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -218,51 +221,46 @@
         }
 
         function filterCars(type) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                b.classList.remove('bg-yellow-600', 'text-black');
+                if (b.innerText.toLowerCase() === type.toLowerCase() || (type === 'all' && b.innerText.toLowerCase() === 'all')) {
+                    b.classList.add('bg-yellow-600', 'text-black');
+                }
+            });
             if(type === 'all') renderCars(carData);
             else renderCars(carData.filter(c => c.type === type));
         }
 
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
-            const filtered = carData.filter(c => c.name.toLowerCase().includes(val));
-            renderCars(filtered);
+            renderCars(carData.filter(c => c.name.toLowerCase().includes(val)));
         });
 
         function openModal(id) {
             const car = carData.find(c => c.id === id);
             const content = document.getElementById('modalContent');
             content.innerHTML = `
-                <div class="p-8 lg:p-12 space-y-6">
-                    <h2 class="text-4xl font-black">${car.name} <span class="text-yellow-500 text-xl font-normal">${car.year}</span></h2>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div class="bg-gray-900 p-3 rounded">
-                            <p class="text-gray-500">Engine</p>
-                            <p class="font-bold">${car.engine}</p>
+                <div class="p-10 lg:p-16 space-y-8 bg-[#0a0a0a]">
+                    <h2 class="text-5xl font-black tracking-tighter uppercase italic">${car.name}</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-950 p-4 rounded-xl border border-gray-900">
+                            <p class="text-gray-600 text-[10px] uppercase font-bold">Performance</p>
+                            <p class="font-bold text-lg">${car.hp}</p>
                         </div>
-                        <div class="bg-gray-900 p-3 rounded">
-                            <p class="text-gray-500">Power</p>
-                            <p class="font-bold">${car.hp}</p>
-                        </div>
-                        <div class="bg-gray-900 p-3 rounded">
-                            <p class="text-gray-500">Top Speed</p>
-                            <p class="font-bold">${car.topSpeed}</p>
-                        </div>
-                        <div class="bg-gray-900 p-3 rounded">
-                            <p class="text-gray-500">Category</p>
-                            <p class="font-bold">${car.type}</p>
+                        <div class="bg-gray-950 p-4 rounded-xl border border-gray-900">
+                            <p class="text-gray-600 text-[10px] uppercase font-bold">Top Velocity</p>
+                            <p class="font-bold text-lg">${car.topSpeed}</p>
                         </div>
                     </div>
-                    <p class="text-gray-400 leading-relaxed">${car.desc}</p>
-                    <div class="pt-6">
-                        <a href="tel:+255754448113" class="bg-yellow-600 text-black px-8 py-3 rounded-full font-bold inline-block hover:scale-105 transition">Inquire Now</a>
+                    <p class="text-gray-500 leading-relaxed font-light">${car.desc}</p>
+                    <div class="pt-4">
+                        <p class="text-[10px] text-yellow-600 font-bold uppercase mb-4">A James Ruzige Original</p>
+                        <a href="tel:+255754448113" class="bg-yellow-600 text-black px-12 py-4 rounded-full font-black text-xs uppercase inline-block">Request Info</a>
                     </div>
                 </div>
-                <div class="bg-black flex flex-col">
-                    <div class="relative pt-[56.25%]">
-                        <iframe class="absolute inset-0 w-full h-full" src="${car.video}" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <img src="${car.img}" class="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition duration-1000"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800'">
+                <div class="bg-black relative h-full min-h-[400px]">
+                    <img src="${car.img}" class="w-full h-full object-cover">
                 </div>
             `;
             document.getElementById('carModal').style.display = 'block';
@@ -274,15 +272,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Initialize
-        renderCars(carData);
-
-        // Close modal on outside click
         window.onclick = function(event) {
-            if (event.target == document.getElementById('carModal')) {
-                closeModal();
-            }
+            if (event.target == document.getElementById('carModal')) closeModal();
         }
+
+        // Initial render
+        renderCars(carData);
     </script>
 </body>
 </html>
